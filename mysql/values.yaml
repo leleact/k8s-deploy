@@ -1,0 +1,30 @@
+image: mysql
+imageTag: latest
+mysqlRootPassword: root
+imagePullPolicy: Always
+
+persistence:
+  enabled: true
+  ## database data Persistent Volume Storage Class
+  ## If defined, storageClassName: <storageClass>
+  ## If set to "-", storageClassName: "", which disables dynamic provisioning
+  ## If undefined (the default) or set to null, no storageClassName spec is
+  ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+  ##   GKE, AWS & OpenStack)
+  ##
+  # storageClass: "-"
+  accessMode: ReadWriteOnce
+  size: 2Gi
+  subPath: mysql
+
+resources:
+  requests:
+    memory: 256Mi
+    cpu: 100m
+  limits:
+    memory: 512Mi
+    cpu: 500m
+
+service:
+  type: NodePort
+  nodePort: 30306

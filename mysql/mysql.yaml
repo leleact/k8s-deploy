@@ -1,0 +1,9 @@
+[debug] Created tunnel using local port: '36925'
+
+[debug] SERVER: "127.0.0.1:36925"
+
+[debug] Original chart version: ""
+[debug] Fetched stable/mysql to /home/lele/.helm/cache/archive/mysql-0.3.5.tgz
+
+[debug] CHART PATH: /home/lele/.helm/cache/archive/mysql-0.3.5.tgz
+
