@@ -1,0 +1,47 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: www-web-0
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Mi
+  #storageClassName: yourClass
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: www-web-1
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Mi
+  #storageClassName: yourClass
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: conf-web-0
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Mi
+  #storageClassName: yourClass
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: conf-web-1
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Mi
+  #storageClassName: yourClass
