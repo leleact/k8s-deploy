@@ -5,8 +5,7 @@ mysqlRootPassword: root
 persistence:
   accessMode: ReadWriteOnce
   enabled: true
-  size: 2Gi
-  subPath: mysql
+  size: 1Gi
 resources:
   limits:
     cpu: 500m
