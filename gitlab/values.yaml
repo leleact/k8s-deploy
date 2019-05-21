@@ -339,7 +339,7 @@ nginx-ingress:
     resources:
       requests:
         cpu: 100m
-        memory: 100Mi
+        memory: 64Mi
     publishService:
       enabled: true
     replicaCount: 1
@@ -356,7 +356,7 @@ nginx-ingress:
           prometheus.io/port: "10254"
   defaultBackend:
     minAvailable: 1
-    replicaCount: 2
+    replicaCount: 1
     resources:
       requests:
         cpu: 5m
