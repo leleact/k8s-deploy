@@ -34,7 +34,7 @@ global:
     allowClusterRoles: true
   ## doc/charts/globals.md#configure-host-settings
   hosts:
-    domain: gitlab.centos.local
+    domain: centos.local
     # hostSuffix:
     https: false
     externalIP:
@@ -321,7 +321,7 @@ certmanager:
 ## doc/architecture/decisions.md#nginx-ingress
 ## Installation & configuration of charts/nginx
 nginx-ingress:
-  enabled: false
+  enabled: true
   tcpExternalConfig: "true"
   controller:
     config:
@@ -342,8 +342,8 @@ nginx-ingress:
         memory: 100Mi
     publishService:
       enabled: true
-    replicaCount: 3
-    minAvailable: 2
+    replicaCount: 1
+    minAvailable: 1
     scope:
       enabled: true
     stats:
@@ -426,7 +426,7 @@ shared-secrets:
 ## Installation & configuration of gitlab/gitlab-runner
 ## See requirements.yaml for current version
 gitlab-runner:
-  install: true
+  install: false
   rbac:
     create: true
   runners:
