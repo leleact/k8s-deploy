@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-curl https://get.helm.sh/helm-v2.14.1-linux-amd64.tar.gz -o helm-v2.14.1-linux-amd64.tar.gz
-tar -xf helm-v2.14.1-linux-amd64.tar.gz
-cd linux-amd64
+curl https://get.helm.sh/helm-v2.14.1-linux-amd64.tar.gz -o $HOME/helm-v2.14.1-linux-amd64.tar.gz
+tar -xf $HOME/helm-v2.14.1-linux-amd64.tar.gz -C $HOME
+cd $HOME/linux-amd64
 mv helm /usr/local/bin/
 
 docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/tiller:v2.14.1
