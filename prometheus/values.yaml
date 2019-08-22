@@ -1,0 +1,62 @@
+alertmanager:
+  ingress:
+    enabled: true
+    annotations:
+       kubernetes.io/ingress.class: nginx
+    hosts:
+       - alertmanager.centos.local
+  persistentVolume:
+    size: 1Gi
+  resources:
+     limits:
+       cpu: 500m
+       memory: 128Mi
+     requests:
+       cpu: 10m
+       memory: 32Mi
+kubeStateMetrics:
+  resources:
+     limits:
+       cpu: 500m
+       memory: 128Mi
+     requests:
+       cpu: 10m
+       memory: 16Mi
+nodeExporter:
+  resources:
+    limits:
+      cpu: 200m
+      memory: 50Mi
+    requests:
+      cpu: 100m
+      memory: 30Mi
+server:
+  ingress:
+    enabled: true
+    annotations:
+       kubernetes.io/ingress.class: nginx
+    hosts:
+       - prometheus.centos.local
+  persistentVolume:
+    size: 2Gi
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 500m
+      memory: 512Mi
+pushgateway:
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    hosts:
+      - pushgateway.centos.local
+  resources:
+    limits:
+      cpu: 10m
+      memory: 32Mi
+    requests:
+      cpu: 10m
+      memory: 32Mi
