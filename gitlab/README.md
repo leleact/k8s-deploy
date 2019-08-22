@@ -21,3 +21,9 @@ user.password = 'secret_pass'
 user.password_confirmation = 'secret_pass'
 user.save!
 ```
+
+## change ingress class
+``` bash
+kubectl -n gitlab edit ingress gitlab-unicorn
+```
+remove kubernetes.io/ingress.class use default ingress controller or set default ingress controller class
