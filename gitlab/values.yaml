@@ -335,6 +335,7 @@ nginx-ingress:
     extraArgs:
       force-namespace-isolation: ""
     service:
+      type: "NodePort"
       externalTrafficPolicy: "Local"
     resources:
       requests:
