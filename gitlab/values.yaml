@@ -6,6 +6,9 @@ global:
   ingress:
     configureCertmanager: false
     class: "nginx"
+  time_zone: "Asia/Shanghai"
+  appConfig:
+    time_zone: "Asia/Shanghai"
 certmanager-issuer:
   email: leleact@gmail.com
 certmanager:
@@ -19,6 +22,9 @@ redis-ha:
 gitlab-runner:
   install: false
 gitlab:
+  gitaly:
+    persistence:
+      size: 5Gi
   unicorn:
     minReplicas: 1
     maxReplicas: 1
@@ -38,6 +44,18 @@ gitlab:
   gitlab-shell:
     minReplicas: 1
     maxReplicas: 1
+  task-runner:
+    persistence:
+      size: 2Gi
 registry:
   minReplicas: 1
   maxReplicas: 1
+postgresql:
+  persistence:
+    size: 2Gi
+redis:
+  persistence:
+    size: 1Gi
+minio:
+  persistence:
+    size: 2Gi

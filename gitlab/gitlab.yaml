@@ -1,6 +1,6 @@
-[debug] Created tunnel using local port: '36196'
+[debug] Created tunnel using local port: '45230'
 
-[debug] SERVER: "127.0.0.1:36196"
+[debug] SERVER: "127.0.0.1:45230"
 
 [debug] Original chart version: ""
 [debug] Fetched gitlab/gitlab to /home/lele/.helm/cache/archive/gitlab-2.2.0.tgz
@@ -9,7 +9,7 @@
 
 NAME:   gitlab
 REVISION: 1
-RELEASED: Thu Aug 22 23:45:53 2019
+RELEASED: Fri Aug 23 08:05:01 2019
 CHART: gitlab-2.2.0
 USER-SUPPLIED VALUES:
 certmanager:
@@ -17,6 +17,9 @@ certmanager:
 certmanager-issuer:
   email: leleact@gmail.com
 gitlab:
+  gitaly:
+    persistence:
+      size: 5Gi
   gitlab-shell:
     maxReplicas: 1
     minReplicas: 1
@@ -27,6 +30,9 @@ gitlab:
       requests:
         cpu: 50m
         memory: 64M
+  task-runner:
+    persistence:
+      size: 2Gi
   unicorn:
     maxReplicas: 1
     minReplicas: 1
@@ -39,6 +45,8 @@ gitlab:
 gitlab-runner:
   install: false
 global:
+  appConfig:
+    time_zone: Asia/Shanghai
   edition: ce
   hosts:
     domain: centos.local
@@ -46,10 +54,20 @@ global:
   ingress:
     class: nginx
     configureCertmanager: false
+  time_zone: Asia/Shanghai
+minio:
+  persistence:
+    size: 2Gi
 nginx-ingress:
   enabled: false
+postgresql:
+  persistence:
+    size: 2Gi
 prometheus:
   install: false
+redis:
+  persistence:
+    size: 1Gi
 redis-ha:
   enabled: false
 registry:
@@ -140,6 +158,7 @@ certmanager-issuer:
         bucket: gitlab-pseudo
         configMap: null
         connection: {}
+      time_zone: Asia/Shanghai
       uploads:
         bucket: gitlab-uploads
         connection: {}
@@ -225,7 +244,7 @@ certmanager-issuer:
       port: 2525
       starttls_auto: false
       user_name: ""
-    time_zone: UTC
+    time_zone: Asia/Shanghai
     workhorse: {}
   rbac:
     create: true
@@ -314,6 +333,7 @@ gitlab:
           bucket: gitlab-pseudo
           configMap: null
           connection: {}
+        time_zone: Asia/Shanghai
         uploads:
           bucket: gitlab-uploads
           connection: {}
@@ -421,7 +441,7 @@ gitlab:
         port: 2525
         starttls_auto: false
         user_name: ""
-      time_zone: UTC
+      time_zone: Asia/Shanghai
       workhorse: {}
     image:
       pullSecrets: []
@@ -442,7 +462,7 @@ gitlab:
       enabled: true
       matchExpressions: []
       matchLabels: {}
-      size: 50Gi
+      size: 5Gi
       subPath: ""
     redis: {}
     resources:
@@ -541,6 +561,7 @@ gitlab:
           bucket: gitlab-pseudo
           configMap: null
           connection: {}
+        time_zone: Asia/Shanghai
         uploads:
           bucket: gitlab-uploads
           connection: {}
@@ -648,7 +669,7 @@ gitlab:
         port: 2525
         starttls_auto: false
         user_name: ""
-      time_zone: UTC
+      time_zone: Asia/Shanghai
       workhorse: {}
     image:
       pullSecrets: []
@@ -759,6 +780,7 @@ gitlab:
           bucket: gitlab-pseudo
           configMap: null
           connection: {}
+        time_zone: Asia/Shanghai
         uploads:
           bucket: gitlab-uploads
           connection: {}
@@ -866,7 +888,7 @@ gitlab:
         port: 2525
         starttls_auto: false
         user_name: ""
-      time_zone: UTC
+      time_zone: Asia/Shanghai
       workhorse: {}
     hpa:
       targetAverageValue: 100m
@@ -973,6 +995,7 @@ gitlab:
         bucket: gitlab-pseudo
         configMap: null
         connection: {}
+      time_zone: Asia/Shanghai
       uploads:
         bucket: gitlab-uploads
         connection: {}
@@ -1080,7 +1103,7 @@ gitlab:
       port: 2525
       starttls_auto: false
       user_name: ""
-    time_zone: UTC
+    time_zone: Asia/Shanghai
     workhorse: {}
   mailroom:
     enabled: true
@@ -1161,6 +1184,7 @@ gitlab:
           bucket: gitlab-pseudo
           configMap: null
           connection: {}
+        time_zone: Asia/Shanghai
         uploads:
           bucket: gitlab-uploads
           connection: {}
@@ -1268,7 +1292,7 @@ gitlab:
         port: 2525
         starttls_auto: false
         user_name: ""
-      time_zone: UTC
+      time_zone: Asia/Shanghai
       workhorse: {}
     image:
       pullSecrets: []
@@ -1370,6 +1394,7 @@ gitlab:
           bucket: gitlab-pseudo
           configMap: null
           connection: {}
+        time_zone: Asia/Shanghai
         uploads:
           bucket: gitlab-uploads
           connection: {}
@@ -1477,7 +1502,7 @@ gitlab:
         port: 2525
         starttls_auto: false
         user_name: ""
-      time_zone: UTC
+      time_zone: Asia/Shanghai
       workhorse: {}
     image:
       pullSecrets: []
@@ -1573,6 +1598,7 @@ gitlab:
           bucket: gitlab-pseudo
           configMap: null
           connection: {}
+        time_zone: Asia/Shanghai
         uploads:
           bucket: gitlab-uploads
           connection: {}
@@ -1680,7 +1706,7 @@ gitlab:
         port: 2525
         starttls_auto: false
         user_name: ""
-      time_zone: UTC
+      time_zone: Asia/Shanghai
       workhorse: {}
     image:
       pullSecrets: []
@@ -1779,6 +1805,7 @@ gitlab:
           bucket: gitlab-pseudo
           configMap: null
           connection: {}
+        time_zone: Asia/Shanghai
         uploads:
           bucket: gitlab-uploads
           connection: {}
@@ -1886,7 +1913,7 @@ gitlab:
         port: 2525
         starttls_auto: false
         user_name: ""
-      time_zone: UTC
+      time_zone: Asia/Shanghai
       workhorse: {}
     hpa:
       targetAverageValue: 350m
@@ -2036,6 +2063,7 @@ gitlab:
           bucket: gitlab-pseudo
           configMap: null
           connection: {}
+        time_zone: Asia/Shanghai
         uploads:
           bucket: gitlab-uploads
           connection: {}
@@ -2143,7 +2171,7 @@ gitlab:
         port: 2525
         starttls_auto: false
         user_name: ""
-      time_zone: UTC
+      time_zone: Asia/Shanghai
       workhorse: {}
     image:
       pullSecrets: []
@@ -2162,7 +2190,7 @@ gitlab:
       enabled: false
       matchExpressions: []
       matchLabels: {}
-      size: 10Gi
+      size: 2Gi
       subPath: ""
     psql:
       password: {}
@@ -2267,6 +2295,7 @@ gitlab:
           bucket: gitlab-pseudo
           configMap: null
           connection: {}
+        time_zone: Asia/Shanghai
         uploads:
           bucket: gitlab-uploads
           connection: {}
@@ -2374,7 +2403,7 @@ gitlab:
         port: 2525
         starttls_auto: false
         user_name: ""
-      time_zone: UTC
+      time_zone: Asia/Shanghai
       workhorse: {}
     helmTests:
       enabled: true
@@ -2537,6 +2566,7 @@ global:
       bucket: gitlab-pseudo
       configMap: null
       connection: {}
+    time_zone: Asia/Shanghai
     uploads:
       bucket: gitlab-uploads
       connection: {}
@@ -2622,7 +2652,7 @@ global:
     port: 2525
     starttls_auto: false
     user_name: ""
-  time_zone: UTC
+  time_zone: Asia/Shanghai
   workhorse: {}
 minio:
   configPath: ""
@@ -2714,6 +2744,7 @@ minio:
         bucket: gitlab-pseudo
         configMap: null
         connection: {}
+      time_zone: Asia/Shanghai
       uploads:
         bucket: gitlab-uploads
         connection: {}
@@ -2799,7 +2830,7 @@ minio:
       port: 2525
       starttls_auto: false
       user_name: ""
-    time_zone: UTC
+    time_zone: Asia/Shanghai
     workhorse: {}
   image: minio/minio
   imagePullPolicy: Always
@@ -2917,7 +2948,7 @@ minio:
     enabled: true
     matchExpressions: []
     matchLabels: {}
-    size: 10Gi
+    size: 2Gi
     subPath: ""
   pullSecrets: []
   replicas: 4
@@ -3162,6 +3193,7 @@ nginx-ingress:
         bucket: gitlab-pseudo
         configMap: null
         connection: {}
+      time_zone: Asia/Shanghai
       uploads:
         bucket: gitlab-uploads
         connection: {}
@@ -3247,7 +3279,7 @@ nginx-ingress:
       port: 2525
       starttls_auto: false
       user_name: ""
-    time_zone: UTC
+    time_zone: Asia/Shanghai
     workhorse: {}
   imagePullSecrets: []
   podSecurityPolicy:
@@ -3341,6 +3373,7 @@ postgresql:
         bucket: gitlab-pseudo
         configMap: null
         connection: {}
+      time_zone: Asia/Shanghai
       uploads:
         bucket: gitlab-uploads
         connection: {}
@@ -3426,7 +3459,7 @@ postgresql:
       port: 2525
       starttls_auto: false
       user_name: ""
-    time_zone: UTC
+    time_zone: Asia/Shanghai
     workhorse: {}
   image: postgres
   imageTag: 9.6.8
@@ -3448,7 +3481,7 @@ postgresql:
     accessMode: ReadWriteOnce
     enabled: true
     mountPath: /var/lib/postgresql/data/pgdata
-    size: 8Gi
+    size: 2Gi
     subPath: postgresql-db
   postgresDatabase: gitlabhq_production
   postgresUser: gitlab
@@ -3555,6 +3588,7 @@ redis:
         bucket: gitlab-pseudo
         configMap: null
         connection: {}
+      time_zone: Asia/Shanghai
       uploads:
         bucket: gitlab-uploads
         connection: {}
@@ -3640,7 +3674,7 @@ redis:
       port: 2525
       starttls_auto: false
       user_name: ""
-    time_zone: UTC
+    time_zone: Asia/Shanghai
     workhorse: {}
   image:
     pullPolicy: IfNotPresent
@@ -3677,7 +3711,7 @@ redis:
       writes: 10
     - time: 900
       writes: 1
-    size: 5Gi
+    size: 1Gi
     subPath: ""
   resources:
     requests:
@@ -3774,6 +3808,7 @@ redis-ha:
         bucket: gitlab-pseudo
         configMap: null
         connection: {}
+      time_zone: Asia/Shanghai
       uploads:
         bucket: gitlab-uploads
         connection: {}
@@ -3859,7 +3894,7 @@ redis-ha:
       port: 2525
       starttls_auto: false
       user_name: ""
-    time_zone: UTC
+    time_zone: Asia/Shanghai
     workhorse: {}
   image:
     pullPolicy: Always
@@ -4020,6 +4055,7 @@ registry:
         bucket: gitlab-pseudo
         configMap: null
         connection: {}
+      time_zone: Asia/Shanghai
       uploads:
         bucket: gitlab-uploads
         connection: {}
@@ -4105,7 +4141,7 @@ registry:
       port: 2525
       starttls_auto: false
       user_name: ""
-    time_zone: UTC
+    time_zone: Asia/Shanghai
     workhorse: {}
   image:
     pullPolicy: IfNotPresent
@@ -4272,6 +4308,7 @@ shared-secrets:
         bucket: gitlab-pseudo
         configMap: null
         connection: {}
+      time_zone: Asia/Shanghai
       uploads:
         bucket: gitlab-uploads
         connection: {}
@@ -4357,7 +4394,7 @@ shared-secrets:
       port: 2525
       starttls_auto: false
       user_name: ""
-    time_zone: UTC
+    time_zone: Asia/Shanghai
     workhorse: {}
   rbac:
     create: true
@@ -4391,141 +4428,6 @@ upgradeCheck:
   tolerations: []
 
 HOOKS:
----
-# gitlab-shared-secrets.1-w4o-selfsign
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: gitlab-shared-secrets.1-w4o-selfsign
-  namespace: gitlab
-  labels:
-    app: shared-secrets
-    chart: shared-secrets-0.1.0
-    release: gitlab
-    heritage: Tiller
-    
-  annotations:
-    "helm.sh/hook": pre-install,pre-upgrade
-    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
-spec:
-  template:
-    metadata:
-      labels:
-        app: shared-secrets
-        release: gitlab
-    spec:
-      securityContext:
-        runAsUser: 65534
-        fsGroup: 65534
-      serviceAccountName: gitlab-shared-secrets
-      restartPolicy: Never      
-      initContainers:
-      - name: cfssl-self-sign
-        image: "registry.gitlab.com/gitlab-org/build/cng/cfssl-self-sign:1.2"
-        env:
-        - name: CA_SUBJECT
-          value: "GitLab Helm Chart" # defaults to GitLab in container
-        - name: CA_ORG
-          value: "gitlab" # defaults to GitLab in container
-        - name: CA_ORG_UNIT
-          value: "gitlab" # defaults to Cloud Native in container
-        - name: CERT_SUBJECT
-          value: "centos.local" # defaults to GitLab in container
-        - name: CERT_DOMAIN
-          value: "centos.local" # defaults to example.com in container
-        - name: EXPIRY
-          value: "365d" # defaults to 8076h in container
-        - name: ALGORITHM
-          value: "rsa" # defaults to ecdsa in container
-        - name: KEY_SIZE
-          value: "4096" # defaults to 256 inside container
-        volumeMounts:
-        - name: certs-path
-          mountPath: /output
-        resources:
-          requests:
-            cpu: 50m
-          
-      containers:
-      - name: kubectl
-        image: "registry.gitlab.com/gitlab-org/build/cng/kubectl:v1.12.10"
-        command:
-        - /bin/bash
-        - -exc
-        - |
-          certname=gitlab-wildcard-tls
-          # create wildcard certificate secret
-          kubectl create secret tls $certname \
-            --cert=/output/wildcard.pem --key=/output/wildcard-key.pem || true
-          kubectl --namespace=$namespace label \
-            secret $certname  $(echo 'app.kubernetes.io/name=gitlab' | sed -E 's/=[^ ]*/-/g')
-          kubectl --namespace=$namespace label --overwrite \
-            secret $certname app=shared-secrets chart=shared-secrets-0.1.0 release=gitlab heritage=Tiller 
-          # create CA certificate secret
-          kubectl create secret generic ${certname}-ca \
-            --from-file=cfssl_ca=/output/ca.pem || true
-          kubectl --namespace=$namespace label \
-            secret ${certname}-ca  $(echo 'app.kubernetes.io/name=gitlab' | sed -E 's/=[^ ]*/-/g')
-          kubectl --namespace=$namespace label --overwrite \
-            secret ${certname}-ca app=shared-secrets chart=shared-secrets-0.1.0 release=gitlab heritage=Tiller 
-        volumeMounts:
-        - name: certs-path
-          mountPath: /output
-        resources:
-          requests:
-            cpu: 50m
-          
-      volumes:
-      - name: certs-path
-        emptyDir: {}
----
-# gitlab-shared-secrets.1-1dh
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: gitlab-shared-secrets.1-1dh
-  namespace: gitlab
-  labels:
-    app: shared-secrets
-    chart: shared-secrets-0.1.0
-    release: gitlab
-    heritage: Tiller
-    
-  annotations:
-    "helm.sh/hook": pre-install,pre-upgrade
-    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
-spec:
-  template:
-    metadata:
-      labels:
-        app: shared-secrets
-        release: gitlab
-    spec:
-      securityContext:
-        runAsUser: 65534
-        fsGroup: 65534
-      serviceAccountName: gitlab-shared-secrets
-      restartPolicy: Never      
-      containers:
-        - name: shared-secrets
-          image: "registry.gitlab.com/gitlab-org/build/cng/kubectl:v1.12.10"
-          command: ['/bin/bash', '/scripts/generate-secrets']
-          
-          volumeMounts:
-            - name: scripts
-              mountPath: /scripts
-            - name: ssh
-              mountPath: /etc/ssh
-          resources:
-            requests:
-              cpu: 50m
-            
-      volumes:
-      - name: scripts
-        configMap:
-          name: gitlab-shared-secrets
-      - name: ssh
-        emptyDir: {}
 ---
 # gitlab-shared-secrets
 apiVersion: v1
@@ -4667,67 +4569,6 @@ data:
     # Registry http.secret secret
     generate_secret_if_needed "gitlab-registry-httpsecret" --from-literal="secret"=$(gen_random 'a-z0-9' 128 | base64 -w 0)
 ---
-# gitlab-shared-secrets
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: gitlab-shared-secrets
-  namespace: gitlab
-  labels:
-    app: shared-secrets
-    chart: shared-secrets-0.1.0
-    release: gitlab
-    heritage: Tiller
-  annotations:
-    "helm.sh/hook": pre-install,pre-upgrade
-    "helm.sh/hook-weight": "-5"
-    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: Role
-  name: gitlab-shared-secrets
-subjects:
-  - kind: ServiceAccount
-    name: gitlab-shared-secrets
-    namespace: gitlab
----
-# gitlab-shared-secrets
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: gitlab-shared-secrets
-  namespace: gitlab
-  labels:
-    app: shared-secrets
-    chart: shared-secrets-0.1.0
-    release: gitlab
-    heritage: Tiller
-    
-  annotations:
-    "helm.sh/hook": pre-install,pre-upgrade
-    "helm.sh/hook-weight": "-5"
-    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
----
-# gitlab-shared-secrets
-kind: Role
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: gitlab-shared-secrets
-  namespace: gitlab
-  labels:
-    app: shared-secrets
-    chart: shared-secrets-0.1.0
-    release: gitlab
-    heritage: Tiller
-  annotations:
-    "helm.sh/hook": pre-install,pre-upgrade
-    "helm.sh/hook-weight": "-5"
-    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
-rules:
-- apiGroups: [""]
-  resources: ["secrets"]
-  verbs: ["get", "list", "create", "patch"]
----
 # gitlab-gitlab-upgrade-check
 apiVersion: v1
 kind: ConfigMap
@@ -4850,11 +4691,59 @@ spec:
         configMap:
           name: gitlab-gitlab-upgrade-check
 ---
-# gitlab-unicorn-test-runner-hz8ix
+# gitlab-shared-secrets.1-7v0
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: gitlab-shared-secrets.1-7v0
+  namespace: gitlab
+  labels:
+    app: shared-secrets
+    chart: shared-secrets-0.1.0
+    release: gitlab
+    heritage: Tiller
+    
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
+spec:
+  template:
+    metadata:
+      labels:
+        app: shared-secrets
+        release: gitlab
+    spec:
+      securityContext:
+        runAsUser: 65534
+        fsGroup: 65534
+      serviceAccountName: gitlab-shared-secrets
+      restartPolicy: Never      
+      containers:
+        - name: shared-secrets
+          image: "registry.gitlab.com/gitlab-org/build/cng/kubectl:v1.12.10"
+          command: ['/bin/bash', '/scripts/generate-secrets']
+          
+          volumeMounts:
+            - name: scripts
+              mountPath: /scripts
+            - name: ssh
+              mountPath: /etc/ssh
+          resources:
+            requests:
+              cpu: 50m
+            
+      volumes:
+      - name: scripts
+        configMap:
+          name: gitlab-shared-secrets
+      - name: ssh
+        emptyDir: {}
+---
+# gitlab-unicorn-test-runner-0lahv
 apiVersion: v1
 kind: Pod
 metadata:
-  name: gitlab-unicorn-test-runner-hz8ix
+  name: gitlab-unicorn-test-runner-0lahv
   namespace: gitlab
   annotations:
     "helm.sh/hook": test-success
@@ -4881,6 +4770,154 @@ spec:
         - key: "password"
           path: initial_root_password
   restartPolicy: Never
+---
+# gitlab-shared-secrets.1-hf8-selfsign
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: gitlab-shared-secrets.1-hf8-selfsign
+  namespace: gitlab
+  labels:
+    app: shared-secrets
+    chart: shared-secrets-0.1.0
+    release: gitlab
+    heritage: Tiller
+    
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
+spec:
+  template:
+    metadata:
+      labels:
+        app: shared-secrets
+        release: gitlab
+    spec:
+      securityContext:
+        runAsUser: 65534
+        fsGroup: 65534
+      serviceAccountName: gitlab-shared-secrets
+      restartPolicy: Never      
+      initContainers:
+      - name: cfssl-self-sign
+        image: "registry.gitlab.com/gitlab-org/build/cng/cfssl-self-sign:1.2"
+        env:
+        - name: CA_SUBJECT
+          value: "GitLab Helm Chart" # defaults to GitLab in container
+        - name: CA_ORG
+          value: "gitlab" # defaults to GitLab in container
+        - name: CA_ORG_UNIT
+          value: "gitlab" # defaults to Cloud Native in container
+        - name: CERT_SUBJECT
+          value: "centos.local" # defaults to GitLab in container
+        - name: CERT_DOMAIN
+          value: "centos.local" # defaults to example.com in container
+        - name: EXPIRY
+          value: "365d" # defaults to 8076h in container
+        - name: ALGORITHM
+          value: "rsa" # defaults to ecdsa in container
+        - name: KEY_SIZE
+          value: "4096" # defaults to 256 inside container
+        volumeMounts:
+        - name: certs-path
+          mountPath: /output
+        resources:
+          requests:
+            cpu: 50m
+          
+      containers:
+      - name: kubectl
+        image: "registry.gitlab.com/gitlab-org/build/cng/kubectl:v1.12.10"
+        command:
+        - /bin/bash
+        - -exc
+        - |
+          certname=gitlab-wildcard-tls
+          # create wildcard certificate secret
+          kubectl create secret tls $certname \
+            --cert=/output/wildcard.pem --key=/output/wildcard-key.pem || true
+          kubectl --namespace=$namespace label \
+            secret $certname  $(echo 'app.kubernetes.io/name=gitlab' | sed -E 's/=[^ ]*/-/g')
+          kubectl --namespace=$namespace label --overwrite \
+            secret $certname app=shared-secrets chart=shared-secrets-0.1.0 release=gitlab heritage=Tiller 
+          # create CA certificate secret
+          kubectl create secret generic ${certname}-ca \
+            --from-file=cfssl_ca=/output/ca.pem || true
+          kubectl --namespace=$namespace label \
+            secret ${certname}-ca  $(echo 'app.kubernetes.io/name=gitlab' | sed -E 's/=[^ ]*/-/g')
+          kubectl --namespace=$namespace label --overwrite \
+            secret ${certname}-ca app=shared-secrets chart=shared-secrets-0.1.0 release=gitlab heritage=Tiller 
+        volumeMounts:
+        - name: certs-path
+          mountPath: /output
+        resources:
+          requests:
+            cpu: 50m
+          
+      volumes:
+      - name: certs-path
+        emptyDir: {}
+---
+# gitlab-shared-secrets
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: gitlab-shared-secrets
+  namespace: gitlab
+  labels:
+    app: shared-secrets
+    chart: shared-secrets-0.1.0
+    release: gitlab
+    heritage: Tiller
+    
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
+---
+# gitlab-shared-secrets
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: gitlab-shared-secrets
+  namespace: gitlab
+  labels:
+    app: shared-secrets
+    chart: shared-secrets-0.1.0
+    release: gitlab
+    heritage: Tiller
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get", "list", "create", "patch"]
+---
+# gitlab-shared-secrets
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: gitlab-shared-secrets
+  namespace: gitlab
+  labels:
+    app: shared-secrets
+    chart: shared-secrets-0.1.0
+    release: gitlab
+    heritage: Tiller
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: gitlab-shared-secrets
+subjects:
+  - kind: ServiceAccount
+    name: gitlab-shared-secrets
+    namespace: gitlab
 MANIFEST:
 
 ---
@@ -5402,7 +5439,7 @@ data:
           container_registry: true
         webhook_timeout: 
         trusted_proxies:
-        time_zone: "UTC"
+        time_zone: "Asia/Shanghai"
         email_from: "gitlab@centos.local"
         email_display_name: "GitLab"
         email_reply_to: "noreply@centos.local"
@@ -5632,7 +5669,7 @@ data:
           container_registry: true
         webhook_timeout: 
         trusted_proxies:
-        time_zone: "UTC"
+        time_zone: "Asia/Shanghai"
         email_from: "gitlab@centos.local"
         email_display_name: "GitLab"
         email_reply_to: "noreply@centos.local"
@@ -5962,7 +5999,7 @@ data:
           container_registry: true
         webhook_timeout: 
         trusted_proxies:
-        time_zone: "UTC"
+        time_zone: "Asia/Shanghai"
         email_from: "gitlab@centos.local"
         email_display_name: "GitLab"
         email_reply_to: "noreply@centos.local"
@@ -6593,7 +6630,7 @@ spec:
     - "ReadWriteOnce"
   resources:
     requests:
-      storage: "10Gi"
+      storage: "2Gi"
   selector:
 ---
 # Source: gitlab/charts/postgresql/templates/pvc.yaml
@@ -6611,7 +6648,7 @@ spec:
     - "ReadWriteOnce"
   resources:
     requests:
-      storage: "8Gi"
+      storage: "2Gi"
 ---
 # Source: gitlab/charts/redis/templates/pvc.yaml
 kind: PersistentVolumeClaim
@@ -6630,7 +6667,7 @@ spec:
     - "ReadWriteOnce"
   resources:
     requests:
-      storage: "5Gi"
+      storage: "1Gi"
   selector:
 ---
 # Source: gitlab/charts/gitlab/charts/gitaly/templates/service.yaml
@@ -7176,7 +7213,7 @@ spec:
         app: sidekiq
         release: gitlab
       annotations:
-        checksum/configmap: 28f8bf868a3ab6f1ca509a8d808a24851d0591743d970b15b283f53cf338dcc8
+        checksum/configmap: 184c0b1035c16a2ae8e4c1aeb393fe0fbbf83c466cc31d80e9b75c87ca7261a6
         cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
         checksum/configmap-pod: 15665de9d228a4862f8b0828cedcf00f3a36df84909ae890d92336556c219909
         prometheus.io/port: "3807"
@@ -7427,7 +7464,7 @@ spec:
         app: task-runner
         release: gitlab
       annotations:
-        checksum/config: 2c78248b80f6e4d7e18806b675282fd7bee48eed60995dd200ac3ca3806ff4b6
+        checksum/config: 951dd1e6b8443608941a835212d55c74551c04c500bcce53e5c09da3baa99dfa
         cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
     spec:
       securityContext:
@@ -7621,7 +7658,7 @@ spec:
         app: unicorn
         release: gitlab
       annotations:
-        checksum/config: eab14a0ec736390c23450b6bc7621b7b05bfd814da1682b4fcf77b04e28bbdd2
+        checksum/config: 76992226320c0f5c184e415712ea09380d68e53638f599654898470187f589d1
         cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
         prometheus.io/path: /-/metrics
         prometheus.io/port: "8080"
@@ -8513,7 +8550,7 @@ spec:
           - "ReadWriteOnce"
         resources:
           requests:
-            storage: "50Gi"
+            storage: "5Gi"
         selector:
 ---
 # Source: gitlab/charts/gitlab/charts/migrations/templates/job.yaml
