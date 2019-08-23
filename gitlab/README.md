@@ -15,6 +15,7 @@ kubectl -n gitlab edit svc gitlab-nginx-ingress-controller
 
 enter `task-runner` pod
 ``` bash
+kubectl exec -it -n gitlab $(kubectl get po -l release=gitlab,app=task-runner -n gitlab | grep runner | awk '{ print $1 }') -- bash
 gitlab-rails console production
 user = User.where(id: 1).first
 user.password = 'secret_pass'
@@ -26,4 +27,7 @@ user.save!
 ``` bash
 kubectl -n gitlab edit ingress gitlab-unicorn
 ```
-remove kubernetes.io/ingress.class use default ingress controller or set default ingress controller class
+
+## Q&A
+
+1. must enable https ? or login http 422 code

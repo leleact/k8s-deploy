@@ -1,6 +1,6 @@
-[debug] Created tunnel using local port: '39112'
+[debug] Created tunnel using local port: '37792'
 
-[debug] SERVER: "127.0.0.1:39112"
+[debug] SERVER: "127.0.0.1:37792"
 
 [debug] Original chart version: ""
 [debug] Fetched gitlab/gitlab to /home/lele/.helm/cache/archive/gitlab-2.1.7.tgz
@@ -9,13 +9,11 @@
 
 NAME:   gitlab
 REVISION: 1
-RELEASED: Fri Aug 23 10:29:19 2019
+RELEASED: Fri Aug 23 13:54:53 2019
 CHART: gitlab-2.1.7
 USER-SUPPLIED VALUES:
 certmanager:
   install: false
-certmanager-issuer:
-  email: leleact@gmail.com
 gitlab:
   gitaly:
     persistence:
@@ -26,33 +24,12 @@ gitlab:
   sidekiq:
     maxReplicas: 1
     minReplicas: 1
-    resources:
-      limits:
-        cpu: 500m
-        memory: 512M
-      requests:
-        cpu: 50m
-        memory: 64M
   task-runner:
     persistence:
       size: 2Gi
-    resources:
-      limits:
-        cpu: 500m
-        memory: 256M
-      requests:
-        cpu: 50m
-        memory: 64M
   unicorn:
     maxReplicas: 1
     minReplicas: 1
-    resources:
-      limits:
-        cpu: 500m
-        memory: 512Mi
-      requests:
-        cpu: 50m
-        memory: 64Mi
 gitlab-runner:
   install: false
 global:
@@ -62,7 +39,6 @@ global:
   hosts:
     domain: centos.local
     externalIP: 10.0.0.2
-    https: false
   ingress:
     class: nginx
     configureCertmanager: false
@@ -92,7 +68,6 @@ certmanager:
   rbac:
     create: true
 certmanager-issuer:
-  email: leleact@gmail.com
   global:
     antiAffinity: soft
     appConfig:
@@ -204,7 +179,7 @@ certmanager-issuer:
       externalIP: 10.0.0.2
       gitlab: {}
       hostSuffix: null
-      https: false
+      https: true
       minio: {}
       registry: {}
       ssh: null
@@ -399,7 +374,7 @@ gitlab:
         externalIP: 10.0.0.2
         gitlab: {}
         hostSuffix: null
-        https: false
+        https: true
         minio: {}
         registry: {}
         ssh: null
@@ -620,7 +595,7 @@ gitlab:
         externalIP: 10.0.0.2
         gitlab: {}
         hostSuffix: null
-        https: false
+        https: true
         minio: {}
         registry: {}
         ssh: null
@@ -832,7 +807,7 @@ gitlab:
         externalIP: 10.0.0.2
         gitlab: {}
         hostSuffix: null
-        https: false
+        https: true
         minio: {}
         registry: {}
         ssh: null
@@ -1040,7 +1015,7 @@ gitlab:
       externalIP: 10.0.0.2
       gitlab: {}
       hostSuffix: null
-      https: false
+      https: true
       minio: {}
       registry: {}
       ssh: null
@@ -1222,7 +1197,7 @@ gitlab:
         externalIP: 10.0.0.2
         gitlab: {}
         hostSuffix: null
-        https: false
+        https: true
         minio: {}
         registry: {}
         ssh: null
@@ -1425,7 +1400,7 @@ gitlab:
         externalIP: 10.0.0.2
         gitlab: {}
         hostSuffix: null
-        https: false
+        https: true
         minio: {}
         registry: {}
         ssh: null
@@ -1622,7 +1597,7 @@ gitlab:
         externalIP: 10.0.0.2
         gitlab: {}
         hostSuffix: null
-        https: false
+        https: true
         minio: {}
         registry: {}
         ssh: null
@@ -1828,7 +1803,7 @@ gitlab:
         externalIP: 10.0.0.2
         gitlab: {}
         hostSuffix: null
-        https: false
+        https: true
         minio: {}
         registry: {}
         ssh: null
@@ -1919,12 +1894,9 @@ gitlab:
       host: null
       tokenIssuer: gitlab-issuer
     resources:
-      limits:
-        cpu: 500m
-        memory: 512M
       requests:
         cpu: 50m
-        memory: 64M
+        memory: 650M
     timeout: 5
     tolerations: []
     trusted_proxies: []
@@ -2082,7 +2054,7 @@ gitlab:
         externalIP: 10.0.0.2
         gitlab: {}
         hostSuffix: null
-        https: false
+        https: true
         minio: {}
         registry: {}
         ssh: null
@@ -2163,12 +2135,9 @@ gitlab:
       host: null
       tokenIssuer: gitlab-issuer
     resources:
-      limits:
-        cpu: 500m
-        memory: 256M
       requests:
         cpu: 50m
-        memory: 64M
+        memory: 350M
     tolerations: []
     trusted_proxies: []
   unicorn:
@@ -2310,7 +2279,7 @@ gitlab:
         externalIP: 10.0.0.2
         gitlab: {}
         hostSuffix: null
-        https: false
+        https: true
         minio: {}
         registry: {}
         ssh: null
@@ -2405,12 +2374,9 @@ gitlab:
       host: null
       tokenIssuer: gitlab-issuer
     resources:
-      limits:
-        cpu: 500m
-        memory: 512Mi
       requests:
-        cpu: 50m
-        memory: 64Mi
+        cpu: 300m
+        memory: 1.2G
     service:
       externalPort: 8080
       internalPort: 8080
@@ -2553,7 +2519,7 @@ global:
     externalIP: 10.0.0.2
     gitlab: {}
     hostSuffix: null
-    https: false
+    https: true
     minio: {}
     registry: {}
     ssh: null
@@ -2724,7 +2690,7 @@ minio:
       externalIP: 10.0.0.2
       gitlab: {}
       hostSuffix: null
-      https: false
+      https: true
       minio: {}
       registry: {}
       ssh: null
@@ -3166,7 +3132,7 @@ nginx-ingress:
       externalIP: 10.0.0.2
       gitlab: {}
       hostSuffix: null
-      https: false
+      https: true
       minio: {}
       registry: {}
       ssh: null
@@ -3339,7 +3305,7 @@ postgresql:
       externalIP: 10.0.0.2
       gitlab: {}
       hostSuffix: null
-      https: false
+      https: true
       minio: {}
       registry: {}
       ssh: null
@@ -3547,7 +3513,7 @@ redis:
       externalIP: 10.0.0.2
       gitlab: {}
       hostSuffix: null
-      https: false
+      https: true
       minio: {}
       registry: {}
       ssh: null
@@ -3760,7 +3726,7 @@ redis-ha:
       externalIP: 10.0.0.2
       gitlab: {}
       hostSuffix: null
-      https: false
+      https: true
       minio: {}
       registry: {}
       ssh: null
@@ -4000,7 +3966,7 @@ registry:
       externalIP: 10.0.0.2
       gitlab: {}
       hostSuffix: null
-      https: false
+      https: true
       minio: {}
       registry: {}
       ssh: null
@@ -4230,7 +4196,7 @@ shared-secrets:
       externalIP: 10.0.0.2
       gitlab: {}
       hostSuffix: null
-      https: false
+      https: true
       minio: {}
       registry: {}
       ssh: null
@@ -4312,6 +4278,215 @@ upgradeCheck:
   tolerations: []
 
 HOOKS:
+---
+# gitlab-gitlab-upgrade-check
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gitlab-gitlab-upgrade-check
+  namespace: gitlab
+  labels:
+    app: gitlab
+    chart: gitlab-2.1.7
+    release: gitlab
+    heritage: Tiller
+    
+  annotations:
+    "helm.sh/hook": pre-upgrade
+    "helm.sh/hook-weight": "-11"
+    "helm.sh/hook-delete-policy": before-hook-creation
+data:
+  runcheck: |
+    #!/bin/sh
+    
+    notify() {
+      echo "$1"
+      echo -n "$1 " >> /dev/termination-log
+    }
+    
+    greater_version()
+    {
+      test "$(printf '%s\n' "$@" | sort -V | tail -n 1)" = "$1";
+    }
+    
+    MIN_VERSION=11.11
+    
+    # Only run check for semver releases
+    if ! awk 'BEGIN{exit(!(ARGV[1] ~ /^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/))}' "$GITLAB_VERSION"; then
+      exit 0
+    fi
+    
+    NEW_MAJOR_VERSION=$(echo $GITLAB_VERSION | awk -F "." '{print $1}')
+    NEW_MINOR_VERSION=$(echo $GITLAB_VERSION | awk -F "." '{print $1"."$2}')
+    
+    if [ ! -f /chart-info/gitlabVersion ]; then
+      notify "It seems you are attempting an unsupported upgrade path."
+      notify "Please follow the upgrade documentation at https://docs.gitlab.com/ee/policy/maintenance.html#upgrade-recommendations"
+      notify "and upgrade to 11.11.3 (Chart Version 1.9.4) before upgrading to ${GITLAB_VERSION}."
+      exit 1
+    fi
+    
+    OLD_VERSION_STRING=$(cat /chart-info/gitlabVersion)
+    
+    # Skip check if old version wasn't semver
+    if ! awk 'BEGIN{exit(!(ARGV[1] ~ /^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/))}' "$OLD_VERSION_STRING"; then
+      exit 0
+    fi
+    
+    OLD_MAJOR_VERSION=$(echo $OLD_VERSION_STRING | awk -F "." '{print $1}')
+    OLD_MINOR_VERSION=$(echo $OLD_VERSION_STRING | awk -F "." '{print $1"."$2}')
+    
+    # Checking
+    # (i) if it is a major version jump
+    # (ii) if existing version is less than required minimum version
+    if test ${OLD_MAJOR_VERSION} -lt ${NEW_MAJOR_VERSION}; then
+      if ! greater_version $OLD_MINOR_VERSION $MIN_VERSION; then
+        notify "It seems you are upgrading from ${OLD_MAJOR_VERSION}.x version series to ${NEW_MAJOR_VERSION}.x series."
+        notify "It is recommended to upgrade to the last minor version in a major version series"
+        notify "first before jumping to the next major version."
+        notify "Please follow the upgrade documentation at https://docs.gitlab.com/ee/policy/maintenance.html#upgrade-recommendations"
+        notify "and upgrade to 11.11.3 (Chart Version 1.9.4) first."
+        exit 1
+      fi
+    fi
+---
+# gitlab-gitlab-upgrade-check
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: gitlab-gitlab-upgrade-check
+  namespace: gitlab
+  labels:
+    app: gitlab
+    chart: gitlab-2.1.7
+    release: gitlab
+    heritage: Tiller
+    
+  annotations:
+    "helm.sh/hook": pre-upgrade
+    "helm.sh/hook-weight": "-10"
+    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
+spec:
+  backoffLimit: 2
+  template:
+    metadata:
+      labels:
+        app: gitlab
+        release: gitlab
+    spec:
+      restartPolicy: Never      
+      containers:
+        - name: run-check
+          image: "busybox:latest"
+          command: ['/bin/sh', '/scripts/runcheck']
+          
+          env:
+            - name: GITLAB_VERSION
+              value: '12.1.6'
+          volumeMounts:
+            - name: chart-info
+              mountPath: /chart-info
+            - name: scripts
+              mountPath: /scripts
+          resources:
+            requests:
+              cpu: 50m
+            
+      volumes:
+      - name: chart-info
+        configMap:
+          name: gitlab-gitlab-chart-info
+          optional: true
+      - name: scripts
+        configMap:
+          name: gitlab-gitlab-upgrade-check
+---
+# gitlab-shared-secrets.1-s4e-selfsign
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: gitlab-shared-secrets.1-s4e-selfsign
+  namespace: gitlab
+  labels:
+    app: shared-secrets
+    chart: shared-secrets-0.1.0
+    release: gitlab
+    heritage: Tiller
+    
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
+spec:
+  template:
+    metadata:
+      labels:
+        app: shared-secrets
+        release: gitlab
+    spec:
+      securityContext:
+        runAsUser: 65534
+        fsGroup: 65534
+      serviceAccountName: gitlab-shared-secrets
+      restartPolicy: Never      
+      initContainers:
+      - name: cfssl-self-sign
+        image: "registry.gitlab.com/gitlab-org/build/cng/cfssl-self-sign:1.2"
+        env:
+        - name: CA_SUBJECT
+          value: "GitLab Helm Chart" # defaults to GitLab in container
+        - name: CA_ORG
+          value: "gitlab" # defaults to GitLab in container
+        - name: CA_ORG_UNIT
+          value: "gitlab" # defaults to Cloud Native in container
+        - name: CERT_SUBJECT
+          value: "centos.local" # defaults to GitLab in container
+        - name: CERT_DOMAIN
+          value: "centos.local" # defaults to example.com in container
+        - name: EXPIRY
+          value: "365d" # defaults to 8076h in container
+        - name: ALGORITHM
+          value: "rsa" # defaults to ecdsa in container
+        - name: KEY_SIZE
+          value: "4096" # defaults to 256 inside container
+        volumeMounts:
+        - name: certs-path
+          mountPath: /output
+        resources:
+          requests:
+            cpu: 50m
+          
+      containers:
+      - name: kubectl
+        image: "registry.gitlab.com/gitlab-org/build/cng/kubectl:54033d1192f85dbd4f30e84187818514b5b07ebd"
+        command:
+        - /bin/bash
+        - -exc
+        - |
+          certname=gitlab-wildcard-tls
+          # create wildcard certificate secret
+          kubectl create secret tls $certname \
+            --cert=/output/wildcard.pem --key=/output/wildcard-key.pem || true
+          kubectl --namespace=$namespace label \
+            secret $certname  $(echo 'app.kubernetes.io/name=gitlab' | sed -E 's/=[^ ]*/-/g')
+          kubectl --namespace=$namespace label --overwrite \
+            secret $certname app=shared-secrets chart=shared-secrets-0.1.0 release=gitlab heritage=Tiller 
+          # create CA certificate secret
+          kubectl create secret generic ${certname}-ca \
+            --from-file=cfssl_ca=/output/ca.pem || true
+          kubectl --namespace=$namespace label \
+            secret ${certname}-ca  $(echo 'app.kubernetes.io/name=gitlab' | sed -E 's/=[^ ]*/-/g')
+          kubectl --namespace=$namespace label --overwrite \
+            secret ${certname}-ca app=shared-secrets chart=shared-secrets-0.1.0 release=gitlab heritage=Tiller 
+        volumeMounts:
+        - name: certs-path
+          mountPath: /output
+        resources:
+          requests:
+            cpu: 50m
+          
+      volumes:
+      - name: certs-path
+        emptyDir: {}
 ---
 # gitlab-shared-secrets
 apiVersion: v1
@@ -4453,280 +4628,6 @@ data:
     # Registry http.secret secret
     generate_secret_if_needed "gitlab-registry-httpsecret" --from-literal="secret"=$(gen_random 'a-z0-9' 128 | base64 -w 0)
 ---
-# gitlab-shared-secrets.1-hc6
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: gitlab-shared-secrets.1-hc6
-  namespace: gitlab
-  labels:
-    app: shared-secrets
-    chart: shared-secrets-0.1.0
-    release: gitlab
-    heritage: Tiller
-    
-  annotations:
-    "helm.sh/hook": pre-install,pre-upgrade
-    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
-spec:
-  template:
-    metadata:
-      labels:
-        app: shared-secrets
-        release: gitlab
-    spec:
-      securityContext:
-        runAsUser: 65534
-        fsGroup: 65534
-      serviceAccountName: gitlab-shared-secrets
-      restartPolicy: Never      
-      containers:
-        - name: shared-secrets
-          image: "registry.gitlab.com/gitlab-org/build/cng/kubectl:54033d1192f85dbd4f30e84187818514b5b07ebd"
-          command: ['/bin/bash', '/scripts/generate-secrets']
-          
-          volumeMounts:
-            - name: scripts
-              mountPath: /scripts
-            - name: ssh
-              mountPath: /etc/ssh
-          resources:
-            requests:
-              cpu: 50m
-            
-      volumes:
-      - name: scripts
-        configMap:
-          name: gitlab-shared-secrets
-      - name: ssh
-        emptyDir: {}
----
-# gitlab-gitlab-upgrade-check
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: gitlab-gitlab-upgrade-check
-  namespace: gitlab
-  labels:
-    app: gitlab
-    chart: gitlab-2.1.7
-    release: gitlab
-    heritage: Tiller
-    
-  annotations:
-    "helm.sh/hook": pre-upgrade
-    "helm.sh/hook-weight": "-11"
-    "helm.sh/hook-delete-policy": before-hook-creation
-data:
-  runcheck: |
-    #!/bin/sh
-    
-    notify() {
-      echo "$1"
-      echo -n "$1 " >> /dev/termination-log
-    }
-    
-    greater_version()
-    {
-      test "$(printf '%s\n' "$@" | sort -V | tail -n 1)" = "$1";
-    }
-    
-    MIN_VERSION=11.11
-    
-    # Only run check for semver releases
-    if ! awk 'BEGIN{exit(!(ARGV[1] ~ /^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/))}' "$GITLAB_VERSION"; then
-      exit 0
-    fi
-    
-    NEW_MAJOR_VERSION=$(echo $GITLAB_VERSION | awk -F "." '{print $1}')
-    NEW_MINOR_VERSION=$(echo $GITLAB_VERSION | awk -F "." '{print $1"."$2}')
-    
-    if [ ! -f /chart-info/gitlabVersion ]; then
-      notify "It seems you are attempting an unsupported upgrade path."
-      notify "Please follow the upgrade documentation at https://docs.gitlab.com/ee/policy/maintenance.html#upgrade-recommendations"
-      notify "and upgrade to 11.11.3 (Chart Version 1.9.4) before upgrading to ${GITLAB_VERSION}."
-      exit 1
-    fi
-    
-    OLD_VERSION_STRING=$(cat /chart-info/gitlabVersion)
-    
-    # Skip check if old version wasn't semver
-    if ! awk 'BEGIN{exit(!(ARGV[1] ~ /^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}/))}' "$OLD_VERSION_STRING"; then
-      exit 0
-    fi
-    
-    OLD_MAJOR_VERSION=$(echo $OLD_VERSION_STRING | awk -F "." '{print $1}')
-    OLD_MINOR_VERSION=$(echo $OLD_VERSION_STRING | awk -F "." '{print $1"."$2}')
-    
-    # Checking
-    # (i) if it is a major version jump
-    # (ii) if existing version is less than required minimum version
-    if test ${OLD_MAJOR_VERSION} -lt ${NEW_MAJOR_VERSION}; then
-      if ! greater_version $OLD_MINOR_VERSION $MIN_VERSION; then
-        notify "It seems you are upgrading from ${OLD_MAJOR_VERSION}.x version series to ${NEW_MAJOR_VERSION}.x series."
-        notify "It is recommended to upgrade to the last minor version in a major version series"
-        notify "first before jumping to the next major version."
-        notify "Please follow the upgrade documentation at https://docs.gitlab.com/ee/policy/maintenance.html#upgrade-recommendations"
-        notify "and upgrade to 11.11.3 (Chart Version 1.9.4) first."
-        exit 1
-      fi
-    fi
----
-# gitlab-gitlab-upgrade-check
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: gitlab-gitlab-upgrade-check
-  namespace: gitlab
-  labels:
-    app: gitlab
-    chart: gitlab-2.1.7
-    release: gitlab
-    heritage: Tiller
-    
-  annotations:
-    "helm.sh/hook": pre-upgrade
-    "helm.sh/hook-weight": "-10"
-    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
-spec:
-  backoffLimit: 2
-  template:
-    metadata:
-      labels:
-        app: gitlab
-        release: gitlab
-    spec:
-      restartPolicy: Never      
-      containers:
-        - name: run-check
-          image: "busybox:latest"
-          command: ['/bin/sh', '/scripts/runcheck']
-          
-          env:
-            - name: GITLAB_VERSION
-              value: '12.1.6'
-          volumeMounts:
-            - name: chart-info
-              mountPath: /chart-info
-            - name: scripts
-              mountPath: /scripts
-          resources:
-            requests:
-              cpu: 50m
-            
-      volumes:
-      - name: chart-info
-        configMap:
-          name: gitlab-gitlab-chart-info
-          optional: true
-      - name: scripts
-        configMap:
-          name: gitlab-gitlab-upgrade-check
----
-# gitlab-shared-secrets.1-5of-selfsign
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: gitlab-shared-secrets.1-5of-selfsign
-  namespace: gitlab
-  labels:
-    app: shared-secrets
-    chart: shared-secrets-0.1.0
-    release: gitlab
-    heritage: Tiller
-    
-  annotations:
-    "helm.sh/hook": pre-install,pre-upgrade
-    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
-spec:
-  template:
-    metadata:
-      labels:
-        app: shared-secrets
-        release: gitlab
-    spec:
-      securityContext:
-        runAsUser: 65534
-        fsGroup: 65534
-      serviceAccountName: gitlab-shared-secrets
-      restartPolicy: Never      
-      initContainers:
-      - name: cfssl-self-sign
-        image: "registry.gitlab.com/gitlab-org/build/cng/cfssl-self-sign:1.2"
-        env:
-        - name: CA_SUBJECT
-          value: "GitLab Helm Chart" # defaults to GitLab in container
-        - name: CA_ORG
-          value: "gitlab" # defaults to GitLab in container
-        - name: CA_ORG_UNIT
-          value: "gitlab" # defaults to Cloud Native in container
-        - name: CERT_SUBJECT
-          value: "centos.local" # defaults to GitLab in container
-        - name: CERT_DOMAIN
-          value: "centos.local" # defaults to example.com in container
-        - name: EXPIRY
-          value: "365d" # defaults to 8076h in container
-        - name: ALGORITHM
-          value: "rsa" # defaults to ecdsa in container
-        - name: KEY_SIZE
-          value: "4096" # defaults to 256 inside container
-        volumeMounts:
-        - name: certs-path
-          mountPath: /output
-        resources:
-          requests:
-            cpu: 50m
-          
-      containers:
-      - name: kubectl
-        image: "registry.gitlab.com/gitlab-org/build/cng/kubectl:54033d1192f85dbd4f30e84187818514b5b07ebd"
-        command:
-        - /bin/bash
-        - -exc
-        - |
-          certname=gitlab-wildcard-tls
-          # create wildcard certificate secret
-          kubectl create secret tls $certname \
-            --cert=/output/wildcard.pem --key=/output/wildcard-key.pem || true
-          kubectl --namespace=$namespace label \
-            secret $certname  $(echo 'app.kubernetes.io/name=gitlab' | sed -E 's/=[^ ]*/-/g')
-          kubectl --namespace=$namespace label --overwrite \
-            secret $certname app=shared-secrets chart=shared-secrets-0.1.0 release=gitlab heritage=Tiller 
-          # create CA certificate secret
-          kubectl create secret generic ${certname}-ca \
-            --from-file=cfssl_ca=/output/ca.pem || true
-          kubectl --namespace=$namespace label \
-            secret ${certname}-ca  $(echo 'app.kubernetes.io/name=gitlab' | sed -E 's/=[^ ]*/-/g')
-          kubectl --namespace=$namespace label --overwrite \
-            secret ${certname}-ca app=shared-secrets chart=shared-secrets-0.1.0 release=gitlab heritage=Tiller 
-        volumeMounts:
-        - name: certs-path
-          mountPath: /output
-        resources:
-          requests:
-            cpu: 50m
-          
-      volumes:
-      - name: certs-path
-        emptyDir: {}
----
-# gitlab-shared-secrets
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: gitlab-shared-secrets
-  namespace: gitlab
-  labels:
-    app: shared-secrets
-    chart: shared-secrets-0.1.0
-    release: gitlab
-    heritage: Tiller
-    
-  annotations:
-    "helm.sh/hook": pre-install,pre-upgrade
-    "helm.sh/hook-weight": "-5"
-    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
----
 # gitlab-shared-secrets
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
@@ -4771,11 +4672,28 @@ subjects:
     name: gitlab-shared-secrets
     namespace: gitlab
 ---
-# gitlab-unicorn-test-runner-wle4h
+# gitlab-shared-secrets
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: gitlab-shared-secrets
+  namespace: gitlab
+  labels:
+    app: shared-secrets
+    chart: shared-secrets-0.1.0
+    release: gitlab
+    heritage: Tiller
+    
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
+---
+# gitlab-unicorn-test-runner-x6eql
 apiVersion: v1
 kind: Pod
 metadata:
-  name: gitlab-unicorn-test-runner-wle4h
+  name: gitlab-unicorn-test-runner-x6eql
   namespace: gitlab
   annotations:
     "helm.sh/hook": test-success
@@ -4802,6 +4720,54 @@ spec:
         - key: "password"
           path: initial_root_password
   restartPolicy: Never
+---
+# gitlab-shared-secrets.1-f3n
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: gitlab-shared-secrets.1-f3n
+  namespace: gitlab
+  labels:
+    app: shared-secrets
+    chart: shared-secrets-0.1.0
+    release: gitlab
+    heritage: Tiller
+    
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
+spec:
+  template:
+    metadata:
+      labels:
+        app: shared-secrets
+        release: gitlab
+    spec:
+      securityContext:
+        runAsUser: 65534
+        fsGroup: 65534
+      serviceAccountName: gitlab-shared-secrets
+      restartPolicy: Never      
+      containers:
+        - name: shared-secrets
+          image: "registry.gitlab.com/gitlab-org/build/cng/kubectl:54033d1192f85dbd4f30e84187818514b5b07ebd"
+          command: ['/bin/bash', '/scripts/generate-secrets']
+          
+          volumeMounts:
+            - name: scripts
+              mountPath: /scripts
+            - name: ssh
+              mountPath: /etc/ssh
+          resources:
+            requests:
+              cpu: 50m
+            
+      volumes:
+      - name: scripts
+        configMap:
+          name: gitlab-shared-secrets
+      - name: ssh
+        emptyDir: {}
 MANIFEST:
 
 ---
@@ -5305,7 +5271,7 @@ data:
     production: &base
       gitlab:
         host: gitlab.centos.local
-        https: false
+        https: true
         impersonation_enabled: 
         usage_ping_enabled: true
         default_can_create_group: true
@@ -5534,7 +5500,7 @@ data:
     production: &base
       gitlab:
         host: gitlab.centos.local
-        https: false
+        https: true
         impersonation_enabled: 
         usage_ping_enabled: true
         default_can_create_group: true
@@ -5739,7 +5705,7 @@ data:
     socket_timeout = 300
     use_mime_magic = True
     verbosity = WARNING
-    website_endpoint = http://minio.centos.local
+    website_endpoint = https://minio.centos.local
     EOF
     else
       mv "/${secret_dir}/objectstorage/.s3cfg" "/${secret_dir}/.s3cfg"
@@ -5752,33 +5718,6 @@ data:
     # 3) GCP Project ID
     # 4) Decline anonymous usage statistics
     printf "$GOOGLE_APPLICATION_CREDENTIALS\nN\n\nN\n" | gsutil config -e && while sleep 3600; do :; done
----
-# Source: gitlab/charts/gitlab/charts/unicorn/templates/configmap.yml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: gitlab-workhorse-config
-  namespace: gitlab
-  labels:
-    app: unicorn
-    chart: unicorn-2.1.7
-    release: gitlab
-    heritage: Tiller
-    
-data:
-  installation_type: |
-    gitlab-helm-chart
-  workhorse-config.toml.erb: |
-    [redis]
-    URL = "redis://gitlab-redis:6379"
-    Password = "<%= File.read("/etc/gitlab/redis/password").strip.dump[1..-2] %>"
-  configure: |
-      set -e
-      mkdir -p /init-secrets-workhorse/gitlab-workhorse
-      cp -v -r -L /init-config/gitlab-workhorse/secret /init-secrets-workhorse/gitlab-workhorse/secret
-      mkdir -p /init-secrets-workhorse/redis
-      cp -v -r -L /init-config/redis/password /init-secrets-workhorse/redis/
-# Leave this here - This line denotes end of block to the parser.
 ---
 # Source: gitlab/charts/gitlab/charts/unicorn/templates/configmap.yml
 apiVersion: v1
@@ -5890,7 +5829,7 @@ data:
     production: &base
       gitlab:
         host: gitlab.centos.local
-        https: false
+        https: true
         impersonation_enabled: 
         usage_ping_enabled: true
         default_can_create_group: true
@@ -6072,6 +6011,33 @@ data:
       fi
     done
 ---
+# Source: gitlab/charts/gitlab/charts/unicorn/templates/configmap.yml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gitlab-workhorse-config
+  namespace: gitlab
+  labels:
+    app: unicorn
+    chart: unicorn-2.1.7
+    release: gitlab
+    heritage: Tiller
+    
+data:
+  installation_type: |
+    gitlab-helm-chart
+  workhorse-config.toml.erb: |
+    [redis]
+    URL = "redis://gitlab-redis:6379"
+    Password = "<%= File.read("/etc/gitlab/redis/password").strip.dump[1..-2] %>"
+  configure: |
+      set -e
+      mkdir -p /init-secrets-workhorse/gitlab-workhorse
+      cp -v -r -L /init-config/gitlab-workhorse/secret /init-secrets-workhorse/gitlab-workhorse/secret
+      mkdir -p /init-secrets-workhorse/redis
+      cp -v -r -L /init-config/redis/password /init-secrets-workhorse/redis/
+# Leave this here - This line denotes end of block to the parser.
+---
 # Source: gitlab/charts/gitlab/charts/unicorn/templates/tests/tests.yaml
 apiVersion: v1
 kind: ConfigMap
@@ -6082,7 +6048,7 @@ data:
   test_login: |
     set -e
     echo 'Start Test'
-    endpoint="http://gitlab.centos.local"
+    endpoint="https://gitlab.centos.local"
     cookie_read="-c /tmp/test_login.cookie"
     cookie_readwrite="$cookie_read -b /tmp/test_login.cookie"
 
@@ -6449,7 +6415,7 @@ data:
       secret: "HTTP_SECRET"
     auth:
       token:
-        realm: http://gitlab.centos.local/jwt/auth
+        realm: https://gitlab.centos.local/jwt/auth
         service: container_registry
         issuer: "gitlab-issuer"
         # This is provided from the initContainer execution, at a known path.
@@ -7090,7 +7056,7 @@ spec:
         app: sidekiq
         release: gitlab
       annotations:
-        checksum/configmap: 1062424a38fbcbd1469cb66f530a5374beec0911c2c21a2173550c49c6f5b108
+        checksum/configmap: 4f2d370ed0a903ed8ea90ba60de0e9124ee5283ecedd74279cd8601f5c04ef36
         cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
         checksum/configmap-pod: 526d1e76067b6943f88850acd8d101cd5ad2b04f36ad48b61f8d26d1d2886848
         prometheus.io/port: "3807"
@@ -7239,12 +7205,9 @@ spec:
               exec:
                 command: ["/bin/bash", "-c", "pkill -f 'sidekiq'"]
           resources:
-            limits:
-              cpu: 500m
-              memory: 512M
             requests:
               cpu: 50m
-              memory: 64M
+              memory: 650M
             
       volumes:
       
@@ -7344,7 +7307,7 @@ spec:
         app: task-runner
         release: gitlab
       annotations:
-        checksum/config: 47b928523cbfacd7bbc2dffebd3849ae1ca17bb1f44d909f13809042501cba4b
+        checksum/config: 233ceadc1e3579bea0adfd12e95f1bec308c040b9d88c4dba6deff14e560c5d8
         cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
     spec:
       securityContext:
@@ -7437,12 +7400,9 @@ spec:
               mountPath: /etc/ssl/certs/
               readOnly: true
           resources:
-            limits:
-              cpu: 500m
-              memory: 256M
             requests:
               cpu: 50m
-              memory: 64M
+              memory: 350M
             
       volumes:
       
@@ -7541,7 +7501,7 @@ spec:
         app: unicorn
         release: gitlab
       annotations:
-        checksum/config: 2e1587f125f603cd8f90fdc8a639c58a7406cb610c30e03cbd2ea24a25df16b0
+        checksum/config: 757474df89d40a6f5362770e3931220c06de4fa3e9f28c9caf6fb3b916fc9d24
         cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
         prometheus.io/path: /-/metrics
         prometheus.io/port: "8080"
@@ -7688,12 +7648,9 @@ spec:
               exec:
                 command: ["/bin/bash", "-c", "pkill -SIGQUIT -f 'unicorn master'"]
           resources:
-            limits:
-              cpu: 500m
-              memory: 512Mi
             requests:
-              cpu: 50m
-              memory: 64Mi
+              cpu: 300m
+              memory: 1.2G
             
         - name: gitlab-workhorse
           image: "registry.gitlab.com/gitlab-org/build/cng/gitlab-workhorse-ce:v12.1.6"
@@ -8168,7 +8125,7 @@ spec:
         app: registry
         release: gitlab
       annotations:
-        checksum/configmap: e80b0b4a6b5b644a780212945efaedaf6e3ca68d5b26041d366f327ab5130769
+        checksum/configmap: 5eb27df45739245893019185ce7db25f3c69294f7f17868e39b2e64da97da574
         cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
     spec:
       securityContext:

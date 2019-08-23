@@ -3,12 +3,12 @@ global:
   hosts:
     domain: centos.local
     externalIP: 10.0.0.2
-    https: false
+    #https: false
   ingress:
     configureCertmanager: false
     class: "nginx"
-    tls:
-      enabled: false
+    #tls:
+    #  enabled: false
   time_zone: "Asia/Shanghai"
   appConfig:
     time_zone: "Asia/Shanghai"
