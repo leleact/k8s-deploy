@@ -3,14 +3,15 @@ global:
   hosts:
     domain: centos.local
     externalIP: 10.0.0.2
+    https: false
   ingress:
     configureCertmanager: false
     class: "nginx"
+    tls:
+      enabled: false
   time_zone: "Asia/Shanghai"
   appConfig:
     time_zone: "Asia/Shanghai"
-certmanager-issuer:
-  email: leleact@gmail.com
 certmanager:
   install: false
 nginx-ingress:
@@ -28,23 +29,34 @@ gitlab:
   unicorn:
     minReplicas: 1
     maxReplicas: 1
-    resources:
-      limits:
-        memory: 512Mi
-      requests:
-        cpu: 50m
-        memory: 64Mi
+    #    resources:
+    #      limits:
+    #        cpu: 500m
+    #        memory: 512Mi
+    #      requests:
+    #        cpu: 50m
+    #        memory: 64Mi
   sidekiq:
     minReplicas: 1
     maxReplicas: 1
-    resources:
-      requests:
-        cpu: 50m
-        memory: 64M
+    #    resources:
+    #      requests:
+    #        cpu: 50m
+    #        memory: 64M
+    #      limits:
+    #        cpu: 500m
+    #        memory: 512M
   gitlab-shell:
     minReplicas: 1
     maxReplicas: 1
   task-runner:
+    #    resources:
+    #      requests:
+    #        cpu: 50m
+    #        memory: 64M
+    #      limits:
+    #        cpu: 500m
+    #        memory: 512M
     persistence:
       size: 2Gi
 registry:
