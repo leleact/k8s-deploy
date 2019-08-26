@@ -18,6 +18,11 @@ enter `task-runner` pod
 kubectl exec -it -n gitlab $(kubectl get po -l release=gitlab,app=task-runner -n gitlab | grep runner | awk '{ print $1 }') -- bash
 ```
 
+initial root password
+```
+kubectl get secrets -n gitlab gitlab-gitlab-initial-root-password -o jsonpath={.data.password} | base64 -d
+```
+
 change root passwd
 ``` bash
 gitlab-rails console production
