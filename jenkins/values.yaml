@@ -11,13 +11,16 @@ master:
     - workflow-aggregator:2.6
     - credentials-binding:1.19
     - git:3.12.0
-    - GitLab:1.5.12
+    - gitlab:1.5.12
+    - localization-zh-cn:1.0.7
   ingress:
     enabled: true
     apiVersion: "networking.k8s.io/v1beta1"
     annotations:
       kubernetes.io/ingress.class: nginx
     hostName: jenkins.centos.local
+  javaOpts: >
+    -Dorg.apache.commons.jelly.tags.fmt.timeZone=Asia/Shanghai
 agent:
   alwaysPullImage: true
 persistence:
