@@ -12,3 +12,8 @@ helm install --name jenkins --namespace dev-ops -f values.yaml stable/jenkins --
 ``` bash
 helm install --name jenkins --namespace dev-ops -f values.yaml stable/jenkins
 ```
+
+## jenkins plugin center
+```
+https://updates.jenkins.io/download/plugins
+```
