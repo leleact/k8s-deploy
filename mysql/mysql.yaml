@@ -1,0 +1,346 @@
+[debug] Created tunnel using local port: '38481'
+
+[debug] SERVER: "127.0.0.1:38481"
+
+[debug] Original chart version: ""
+[debug] Fetched stable/mysql to /home/lele/.helm/cache/archive/mysql-1.3.1.tgz
+
+[debug] CHART PATH: /home/lele/.helm/cache/archive/mysql-1.3.1.tgz
+
+NAME:   mysql
+REVISION: 1
+RELEASED: Tue Aug 27 15:06:11 2019
+CHART: mysql-1.3.1
+USER-SUPPLIED VALUES:
+imagePullPolicy: Always
+imageTag: latest
+mysqlRootPassword: root
+persistence:
+  size: 1Gi
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 256Mi
+timezone: Asia/Shanghai
+
+COMPUTED VALUES:
+args: []
+busybox:
+  image: busybox
+  tag: 1.29.3
+configurationFiles: {}
+configurationFilesPath: /etc/mysql/conf.d/
+deploymentAnnotations: {}
+extraInitContainers: |
+  # - name: do-something
+  #   image: busybox
+  #   command: ['do', 'something']
+extraVolumeMounts: |
+  # - name: extras
+  #   mountPath: /usr/share/extras
+  #   readOnly: true
+extraVolumes: |
+  # - name: extras
+  #   emptyDir: {}
+image: mysql
+imagePullPolicy: Always
+imageTag: latest
+initContainer:
+  resources:
+    requests:
+      cpu: 10m
+      memory: 10Mi
+initializationFiles: {}
+livenessProbe:
+  failureThreshold: 3
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  successThreshold: 1
+  timeoutSeconds: 5
+metrics:
+  annotations: {}
+  enabled: false
+  flags: []
+  image: prom/mysqld-exporter
+  imagePullPolicy: IfNotPresent
+  imageTag: v0.10.0
+  livenessProbe:
+    initialDelaySeconds: 15
+    timeoutSeconds: 5
+  readinessProbe:
+    initialDelaySeconds: 5
+    timeoutSeconds: 1
+  resources: {}
+  serviceMonitor:
+    additionalLabels: {}
+    enabled: false
+mysqlRootPassword: root
+nodeSelector: {}
+persistence:
+  accessMode: ReadWriteOnce
+  annotations: {}
+  enabled: true
+  size: 1Gi
+podAnnotations: {}
+podLabels: {}
+readinessProbe:
+  failureThreshold: 3
+  initialDelaySeconds: 5
+  periodSeconds: 10
+  successThreshold: 1
+  timeoutSeconds: 1
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 256Mi
+securityContext:
+  enabled: false
+  fsGroup: 999
+  runAsUser: 999
+service:
+  annotations: {}
+  port: 3306
+  type: ClusterIP
+ssl:
+  certificates: null
+  enabled: false
+  secret: mysql-ssl-certs
+testFramework:
+  image: dduportal/bats
+  tag: 0.4.0
+timezone: Asia/Shanghai
+tolerations: []
+
+HOOKS:
+---
+# mysql-test
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql-test
+  namespace: mysql
+  labels:
+    app: mysql
+    chart: "mysql-1.3.1"
+    heritage: "Tiller"
+    release: "mysql"
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  initContainers:
+    - name: test-framework
+      image: "dduportal/bats:0.4.0"
+      command:
+      - "bash"
+      - "-c"
+      - |
+        set -ex
+        # copy bats to tools dir
+        cp -R /usr/local/libexec/ /tools/bats/
+      volumeMounts:
+      - mountPath: /tools
+        name: tools
+  containers:
+    - name: mysql-test
+      image: "mysql:latest"
+      command: ["/tools/bats/bats", "-t", "/tests/run.sh"]
+      volumeMounts:
+      - mountPath: /tests
+        name: tests
+        readOnly: true
+      - mountPath: /tools
+        name: tools
+  volumes:
+  - name: tests
+    configMap:
+      name: mysql-test
+  - name: tools
+    emptyDir: {}
+  restartPolicy: Never
+MANIFEST:
+
+---
+# Source: mysql/templates/secrets.yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mysql
+  namespace: mysql
+  labels:
+    app: mysql
+    chart: "mysql-1.3.1"
+    release: "mysql"
+    heritage: "Tiller"
+type: Opaque
+data:
+  
+  mysql-root-password:  "cm9vdA=="
+  
+  
+  mysql-password: "SzdJTHduREVSZQ=="
+---
+# Source: mysql/templates/tests/test-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-test
+  namespace: mysql
+  labels:
+    app: mysql
+    chart: "mysql-1.3.1"
+    heritage: "Tiller"
+    release: "mysql"
+data:
+  run.sh: |-
+    @test "Testing MySQL Connection" {
+      mysql --host=mysql --port=3306 -u root -proot
+    }
+---
+# Source: mysql/templates/pvc.yaml
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: mysql
+  namespace: mysql
+  labels:
+    app: mysql
+    chart: "mysql-1.3.1"
+    release: "mysql"
+    heritage: "Tiller"
+spec:
+  accessModes:
+    - "ReadWriteOnce"
+  resources:
+    requests:
+      storage: "1Gi"
+---
+# Source: mysql/templates/svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql
+  namespace: mysql
+  labels:
+    app: mysql
+    chart: "mysql-1.3.1"
+    release: "mysql"
+    heritage: "Tiller"
+  annotations:
+spec:
+  type: ClusterIP
+  ports:
+  - name: mysql
+    port: 3306
+    targetPort: mysql
+  selector:
+    app: mysql
+---
+# Source: mysql/templates/deployment.yaml
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: mysql
+  namespace: mysql
+  labels:
+    app: mysql
+    chart: "mysql-1.3.1"
+    release: "mysql"
+    heritage: "Tiller"
+
+spec:
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      initContainers:
+      - name: "remove-lost-found"
+        image: "busybox:1.29.3"
+        imagePullPolicy: "Always"
+        resources:
+          requests:
+            cpu: 10m
+            memory: 10Mi
+          
+        command:  ["rm", "-fr", "/var/lib/mysql/lost+found"]
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/mysql
+      # - name: do-something
+      #   image: busybox
+      #   command: ['do', 'something']
+      
+      containers:
+      - name: mysql
+        image: "mysql:latest"
+        imagePullPolicy: "Always"
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 100m
+            memory: 256Mi
+          
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql
+              key: mysql-root-password
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql
+              key: mysql-password
+              optional: true
+        - name: MYSQL_USER
+          value: ""
+        - name: MYSQL_DATABASE
+          value: ""
+        - name: TZ
+          value: Asia/Shanghai
+        ports:
+        - name: mysql
+          containerPort: 3306
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - "mysqladmin ping -u root -p${MYSQL_ROOT_PASSWORD}"
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          successThreshold: 1
+          failureThreshold: 3
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - "mysqladmin ping -u root -p${MYSQL_ROOT_PASSWORD}"
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          timeoutSeconds: 1
+          successThreshold: 1
+          failureThreshold: 3
+        volumeMounts:
+        - name: data
+          mountPath: /var/lib/mysql
+        # - name: extras
+        #   mountPath: /usr/share/extras
+        #   readOnly: true
+        
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: mysql
+      # - name: extras
+      #   emptyDir: {}
