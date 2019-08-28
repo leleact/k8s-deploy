@@ -13,6 +13,7 @@ master:
     - git:3.12.0
     - gitlab:1.5.12
     - localization-zh-cn:1.0.7
+    - role-strategy:2.13
   ingress:
     enabled: true
     apiVersion: "networking.k8s.io/v1beta1"
