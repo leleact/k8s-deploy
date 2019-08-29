@@ -19,7 +19,12 @@ master:
     apiVersion: "networking.k8s.io/v1beta1"
     annotations:
       kubernetes.io/ingress.class: nginx
+      kubernetes.io/tls-acme: "true"
     hostName: jenkins.centos.local
+    tls:
+      - secretName: jenkins.cluster.local
+        hosts:
+          - jenkins.centos.local
   javaOpts: >
     -Dorg.apache.commons.jelly.tags.fmt.timeZone=Asia/Shanghai
 agent:
