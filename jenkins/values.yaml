@@ -6,10 +6,10 @@ master:
       memory: "1024Mi"
   serviceType: ClusterIP
   installPlugins:
-    - kubernetes:1.18.1
+    - kubernetes:1.18.3
     - workflow-job:2.33
     - workflow-aggregator:2.6
-    - credentials-binding:1.19
+    - credentials-binding:1.20
     - git:3.12.0
     - gitlab:1.5.12
     - localization-zh-cn:1.0.7
