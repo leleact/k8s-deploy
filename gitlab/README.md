@@ -18,11 +18,6 @@ enter `task-runner` pod
 kubectl exec -it -n gitlab $(kubectl get po -l release=gitlab,app=task-runner -n gitlab | grep runner | awk '{ print $1 }') -- bash
 ```
 
-initial root password
-```
-kubectl get secrets -n gitlab gitlab-gitlab-initial-root-password -o jsonpath={.data.password} | base64 -d
-```
-
 change root passwd
 ``` bash
 gitlab-rails console production
@@ -35,6 +30,19 @@ or
 
 ``` bash
 /srv/gitlab/bin/rails runner "user = User.first; user.password='#{password}'; user.password_confirmation='#{password}'; user.save!"
+```
+
+## initial root password
+```
+kubectl get secrets -n gitlab gitlab-gitlab-initial-root-password -o jsonpath={.data.password} | base64 -d
+```
+
+## gen tls
+``` bash
+openssl genrsa -out gitlab.centos.local.key 4096
+openssl req -new -sha512 -key gitlab.centos.local.key -subj "/C=CN/ST=Shanghai/O=Local Gitlab, Inc./CN=gitlab.centos.local" -config ./openssl.cnf -out gitlab.centos.local.csr
+openssl req -in gitlab.centos.local.csr -noout -text
+openssl ca -in gitlab.centos.local.csr -md sha512 -keyfile cakey.pem -cert cacert.pem -days 365 -out gitlab.centos.local.crt  -config ./openssl.cnf
 ```
 
 ## change ingress class

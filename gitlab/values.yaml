@@ -3,12 +3,13 @@ global:
   hosts:
     domain: centos.local
     externalIP: 10.0.0.2
-    #https: false
   ingress:
     configureCertmanager: false
     class: "nginx"
-    #tls:
-    #  enabled: false
+    #annotations:
+      #kubernetes.io/tls-acme: true
+    tls:
+      secretName: gitlab-tls
   time_zone: "Asia/Shanghai"
   appConfig:
     time_zone: "Asia/Shanghai"

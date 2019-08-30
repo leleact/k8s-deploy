@@ -1,16 +1,16 @@
-[debug] Created tunnel using local port: '37792'
+[debug] Created tunnel using local port: '34490'
 
-[debug] SERVER: "127.0.0.1:37792"
+[debug] SERVER: "127.0.0.1:34490"
 
 [debug] Original chart version: ""
-[debug] Fetched gitlab/gitlab to /home/lele/.helm/cache/archive/gitlab-2.1.7.tgz
+[debug] Fetched gitlab/gitlab to /home/lele/.helm/cache/archive/gitlab-2.2.1.tgz
 
-[debug] CHART PATH: /home/lele/.helm/cache/archive/gitlab-2.1.7.tgz
+[debug] CHART PATH: /home/lele/.helm/cache/archive/gitlab-2.2.1.tgz
 
 NAME:   gitlab
 REVISION: 1
-RELEASED: Fri Aug 23 13:54:53 2019
-CHART: gitlab-2.1.7
+RELEASED: Fri Aug 30 11:20:24 2019
+CHART: gitlab-2.2.1
 USER-SUPPLIED VALUES:
 certmanager:
   install: false
@@ -42,6 +42,8 @@ global:
   ingress:
     class: nginx
     configureCertmanager: false
+    tls:
+      secretName: gitlab-tls
   time_zone: Asia/Shanghai
 minio:
   persistence:
@@ -189,13 +191,21 @@ certmanager-issuer:
       class: nginx
       configureCertmanager: false
       enabled: true
-      tls: {}
+      tls:
+        secretName: gitlab-tls
     initialRootPassword: {}
+    kubectl:
+      image:
+        pullSecrets: []
+        repository: registry.gitlab.com/gitlab-org/build/cng/kubectl
+        tag: v1.12.10
     minio:
       credentials: {}
       enabled: true
     operator:
       enabled: false
+      rollout:
+        autoPause: true
     psql:
       password: {}
     railsSecrets: {}
@@ -226,11 +236,6 @@ certmanager-issuer:
       user_name: ""
     time_zone: Asia/Shanghai
     workhorse: {}
-  image:
-    pullPolicy: Always
-    pullSecrets: []
-    repository: registry.gitlab.com/gitlab-org/build/cng/kubectl
-    tag: 1f8690f03f7aeef27e727396927ab3cc96ac89e7
   rbac:
     create: true
   resources:
@@ -384,13 +389,21 @@ gitlab:
         class: nginx
         configureCertmanager: false
         enabled: true
-        tls: {}
+        tls:
+          secretName: gitlab-tls
       initialRootPassword: {}
+      kubectl:
+        image:
+          pullSecrets: []
+          repository: registry.gitlab.com/gitlab-org/build/cng/kubectl
+          tag: v1.12.10
       minio:
         credentials: {}
         enabled: true
       operator:
         enabled: false
+        rollout:
+          autoPause: true
       psql:
         password: {}
       railsSecrets: {}
@@ -605,13 +618,21 @@ gitlab:
         class: nginx
         configureCertmanager: false
         enabled: true
-        tls: {}
+        tls:
+          secretName: gitlab-tls
       initialRootPassword: {}
+      kubectl:
+        image:
+          pullSecrets: []
+          repository: registry.gitlab.com/gitlab-org/build/cng/kubectl
+          tag: v1.12.10
       minio:
         credentials: {}
         enabled: true
       operator:
         enabled: false
+        rollout:
+          autoPause: true
       psql:
         password: {}
       railsSecrets: {}
@@ -817,13 +838,21 @@ gitlab:
         class: nginx
         configureCertmanager: false
         enabled: true
-        tls: {}
+        tls:
+          secretName: gitlab-tls
       initialRootPassword: {}
+      kubectl:
+        image:
+          pullSecrets: []
+          repository: registry.gitlab.com/gitlab-org/build/cng/kubectl
+          tag: v1.12.10
       minio:
         credentials: {}
         enabled: true
       operator:
         enabled: false
+        rollout:
+          autoPause: true
       psql:
         password: {}
       railsSecrets: {}
@@ -1025,13 +1054,21 @@ gitlab:
       class: nginx
       configureCertmanager: false
       enabled: true
-      tls: {}
+      tls:
+        secretName: gitlab-tls
     initialRootPassword: {}
+    kubectl:
+      image:
+        pullSecrets: []
+        repository: registry.gitlab.com/gitlab-org/build/cng/kubectl
+        tag: v1.12.10
     minio:
       credentials: {}
       enabled: true
     operator:
       enabled: false
+      rollout:
+        autoPause: true
     psql:
       password: {}
     railsSecrets: {}
@@ -1207,13 +1244,21 @@ gitlab:
         class: nginx
         configureCertmanager: false
         enabled: true
-        tls: {}
+        tls:
+          secretName: gitlab-tls
       initialRootPassword: {}
+      kubectl:
+        image:
+          pullSecrets: []
+          repository: registry.gitlab.com/gitlab-org/build/cng/kubectl
+          tag: v1.12.10
       minio:
         credentials: {}
         enabled: true
       operator:
         enabled: false
+        rollout:
+          autoPause: true
       psql:
         password: {}
       railsSecrets: {}
@@ -1410,13 +1455,21 @@ gitlab:
         class: nginx
         configureCertmanager: false
         enabled: true
-        tls: {}
+        tls:
+          secretName: gitlab-tls
       initialRootPassword: {}
+      kubectl:
+        image:
+          pullSecrets: []
+          repository: registry.gitlab.com/gitlab-org/build/cng/kubectl
+          tag: v1.12.10
       minio:
         credentials: {}
         enabled: true
       operator:
         enabled: false
+        rollout:
+          autoPause: true
       psql:
         password: {}
       railsSecrets: {}
@@ -1607,13 +1660,21 @@ gitlab:
         class: nginx
         configureCertmanager: false
         enabled: true
-        tls: {}
+        tls:
+          secretName: gitlab-tls
       initialRootPassword: {}
+      kubectl:
+        image:
+          pullSecrets: []
+          repository: registry.gitlab.com/gitlab-org/build/cng/kubectl
+          tag: v1.12.10
       minio:
         credentials: {}
         enabled: true
       operator:
         enabled: false
+        rollout:
+          autoPause: true
       psql:
         password: {}
       railsSecrets: {}
@@ -1651,18 +1712,12 @@ gitlab:
       resources:
         requests:
           cpu: 50m
-    install:
-      enabled: true
-      image:
-        pullSecrets: []
-        repository: gcr.io/google_containers/hyperkube
-        tag: v1.9.0
     resources:
       requests:
         cpu: 100m
         memory: 64M
     tolerations: []
-    version: 0.5
+    version: 0.6
   sidekiq:
     annotations: {}
     concurrency: 10
@@ -1813,13 +1868,21 @@ gitlab:
         class: nginx
         configureCertmanager: false
         enabled: true
-        tls: {}
+        tls:
+          secretName: gitlab-tls
       initialRootPassword: {}
+      kubectl:
+        image:
+          pullSecrets: []
+          repository: registry.gitlab.com/gitlab-org/build/cng/kubectl
+          tag: v1.12.10
       minio:
         credentials: {}
         enabled: true
       operator:
         enabled: false
+        rollout:
+          autoPause: true
       psql:
         password: {}
       railsSecrets: {}
@@ -2064,13 +2127,21 @@ gitlab:
         class: nginx
         configureCertmanager: false
         enabled: true
-        tls: {}
+        tls:
+          secretName: gitlab-tls
       initialRootPassword: {}
+      kubectl:
+        image:
+          pullSecrets: []
+          repository: registry.gitlab.com/gitlab-org/build/cng/kubectl
+          tag: v1.12.10
       minio:
         credentials: {}
         enabled: true
       operator:
         enabled: false
+        rollout:
+          autoPause: true
       psql:
         password: {}
       railsSecrets: {}
@@ -2289,13 +2360,21 @@ gitlab:
         class: nginx
         configureCertmanager: false
         enabled: true
-        tls: {}
+        tls:
+          secretName: gitlab-tls
       initialRootPassword: {}
+      kubectl:
+        image:
+          pullSecrets: []
+          repository: registry.gitlab.com/gitlab-org/build/cng/kubectl
+          tag: v1.12.10
       minio:
         credentials: {}
         enabled: true
       operator:
         enabled: false
+        rollout:
+          autoPause: true
       psql:
         password: {}
       railsSecrets: {}
@@ -2529,13 +2608,21 @@ global:
     class: nginx
     configureCertmanager: false
     enabled: true
-    tls: {}
+    tls:
+      secretName: gitlab-tls
   initialRootPassword: {}
+  kubectl:
+    image:
+      pullSecrets: []
+      repository: registry.gitlab.com/gitlab-org/build/cng/kubectl
+      tag: v1.12.10
   minio:
     credentials: {}
     enabled: true
   operator:
     enabled: false
+    rollout:
+      autoPause: true
   psql:
     password: {}
   railsSecrets: {}
@@ -2700,13 +2787,21 @@ minio:
       class: nginx
       configureCertmanager: false
       enabled: true
-      tls: {}
+      tls:
+        secretName: gitlab-tls
     initialRootPassword: {}
+    kubectl:
+      image:
+        pullSecrets: []
+        repository: registry.gitlab.com/gitlab-org/build/cng/kubectl
+        tag: v1.12.10
     minio:
       credentials: {}
       enabled: true
     operator:
       enabled: false
+      rollout:
+        autoPause: true
     psql:
       password: {}
     railsSecrets: {}
@@ -3142,13 +3237,21 @@ nginx-ingress:
       class: nginx
       configureCertmanager: false
       enabled: true
-      tls: {}
+      tls:
+        secretName: gitlab-tls
     initialRootPassword: {}
+    kubectl:
+      image:
+        pullSecrets: []
+        repository: registry.gitlab.com/gitlab-org/build/cng/kubectl
+        tag: v1.12.10
     minio:
       credentials: {}
       enabled: true
     operator:
       enabled: false
+      rollout:
+        autoPause: true
     psql:
       password: {}
     railsSecrets: {}
@@ -3315,13 +3418,21 @@ postgresql:
       class: nginx
       configureCertmanager: false
       enabled: true
-      tls: {}
+      tls:
+        secretName: gitlab-tls
     initialRootPassword: {}
+    kubectl:
+      image:
+        pullSecrets: []
+        repository: registry.gitlab.com/gitlab-org/build/cng/kubectl
+        tag: v1.12.10
     minio:
       credentials: {}
       enabled: true
     operator:
       enabled: false
+      rollout:
+        autoPause: true
     psql:
       password: {}
     railsSecrets: {}
@@ -3523,13 +3634,21 @@ redis:
       class: nginx
       configureCertmanager: false
       enabled: true
-      tls: {}
+      tls:
+        secretName: gitlab-tls
     initialRootPassword: {}
+    kubectl:
+      image:
+        pullSecrets: []
+        repository: registry.gitlab.com/gitlab-org/build/cng/kubectl
+        tag: v1.12.10
     minio:
       credentials: {}
       enabled: true
     operator:
       enabled: false
+      rollout:
+        autoPause: true
     psql:
       password: {}
     railsSecrets: {}
@@ -3736,13 +3855,21 @@ redis-ha:
       class: nginx
       configureCertmanager: false
       enabled: true
-      tls: {}
+      tls:
+        secretName: gitlab-tls
     initialRootPassword: {}
+    kubectl:
+      image:
+        pullSecrets: []
+        repository: registry.gitlab.com/gitlab-org/build/cng/kubectl
+        tag: v1.12.10
     minio:
       credentials: {}
       enabled: true
     operator:
       enabled: false
+      rollout:
+        autoPause: true
     psql:
       password: {}
     railsSecrets: {}
@@ -3976,13 +4103,21 @@ registry:
       class: nginx
       configureCertmanager: false
       enabled: true
-      tls: {}
+      tls:
+        secretName: gitlab-tls
     initialRootPassword: {}
+    kubectl:
+      image:
+        pullSecrets: []
+        repository: registry.gitlab.com/gitlab-org/build/cng/kubectl
+        tag: v1.12.10
     minio:
       credentials: {}
       enabled: true
     operator:
       enabled: false
+      rollout:
+        autoPause: true
     psql:
       password: {}
     railsSecrets: {}
@@ -4062,26 +4197,42 @@ registry:
       # Set to known path, to used ConfigMap
       cat /config/certificate.crt > /registry/certificate.crt
     tag: latest
+  log:
+    fields:
+      service: registry
+    level: warn
   maxReplicas: 1
   maxUnavailable: 1
   minReplicas: 1
   minio:
     redirect: false
+  networkpolicy:
+    annotations: {}
+    egress:
+      enabled: false
+      rules: []
+    enabled: false
+    ingress:
+      enabled: false
+      rules: []
   nodeSelector: {}
   resources:
     requests:
       cpu: 50m
       memory: 32Mi
   service:
-    clusterIP: 0.0.0.0
+    clusterIP: null
     externalPort: 5000
     internalPort: 5000
+    loadBalancerIP: null
     name: registry
     type: ClusterIP
   storage: {}
   tokenIssuer: gitlab-issuer
   tokenService: container_registry
   tolerations: []
+  validation:
+    disabled: true
 shared-secrets:
   enabled: true
   env: production
@@ -4206,13 +4357,21 @@ shared-secrets:
       class: nginx
       configureCertmanager: false
       enabled: true
-      tls: {}
+      tls:
+        secretName: gitlab-tls
     initialRootPassword: {}
+    kubectl:
+      image:
+        pullSecrets: []
+        repository: registry.gitlab.com/gitlab-org/build/cng/kubectl
+        tag: v1.12.10
     minio:
       credentials: {}
       enabled: true
     operator:
       enabled: false
+      rollout:
+        autoPause: true
     psql:
       password: {}
     railsSecrets: {}
@@ -4243,10 +4402,6 @@ shared-secrets:
       user_name: ""
     time_zone: Asia/Shanghai
     workhorse: {}
-  image:
-    pullSecrets: []
-    repository: registry.gitlab.com/gitlab-org/build/cng/kubectl
-    tag: 54033d1192f85dbd4f30e84187818514b5b07ebd
   rbac:
     create: true
   resources:
@@ -4263,6 +4418,7 @@ shared-secrets:
       tag: 1.2
     keyAlgorithm: rsa
     keySize: "4096"
+    pullSecrets: []
   serviceAccount:
     create: true
     name: null
@@ -4279,6 +4435,115 @@ upgradeCheck:
 
 HOOKS:
 ---
+# gitlab-shared-secrets.1-dp1
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: gitlab-shared-secrets.1-dp1
+  namespace: gitlab
+  labels:
+    app: shared-secrets
+    chart: shared-secrets-0.1.0
+    release: gitlab
+    heritage: Tiller
+    
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
+spec:
+  template:
+    metadata:
+      labels:
+        app: shared-secrets
+        release: gitlab
+    spec:
+      securityContext:
+        runAsUser: 65534
+        fsGroup: 65534
+      serviceAccountName: gitlab-shared-secrets
+      restartPolicy: Never      
+      containers:
+        - name: shared-secrets
+          image: "registry.gitlab.com/gitlab-org/build/cng/kubectl:v1.12.10"
+          command: ['/bin/bash', '/scripts/generate-secrets']
+          
+          volumeMounts:
+            - name: scripts
+              mountPath: /scripts
+            - name: ssh
+              mountPath: /etc/ssh
+          resources:
+            requests:
+              cpu: 50m
+            
+      volumes:
+      - name: scripts
+        configMap:
+          name: gitlab-shared-secrets
+      - name: ssh
+        emptyDir: {}
+---
+# gitlab-shared-secrets
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: gitlab-shared-secrets
+  namespace: gitlab
+  labels:
+    app: shared-secrets
+    chart: shared-secrets-0.1.0
+    release: gitlab
+    heritage: Tiller
+    
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
+---
+# gitlab-shared-secrets
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: gitlab-shared-secrets
+  namespace: gitlab
+  labels:
+    app: shared-secrets
+    chart: shared-secrets-0.1.0
+    release: gitlab
+    heritage: Tiller
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  verbs: ["get", "list", "create", "patch"]
+---
+# gitlab-shared-secrets
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: gitlab-shared-secrets
+  namespace: gitlab
+  labels:
+    app: shared-secrets
+    chart: shared-secrets-0.1.0
+    release: gitlab
+    heritage: Tiller
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: gitlab-shared-secrets
+subjects:
+  - kind: ServiceAccount
+    name: gitlab-shared-secrets
+    namespace: gitlab
+---
 # gitlab-gitlab-upgrade-check
 apiVersion: v1
 kind: ConfigMap
@@ -4287,7 +4552,7 @@ metadata:
   namespace: gitlab
   labels:
     app: gitlab
-    chart: gitlab-2.1.7
+    chart: gitlab-2.2.1
     release: gitlab
     heritage: Tiller
     
@@ -4358,7 +4623,7 @@ metadata:
   namespace: gitlab
   labels:
     app: gitlab
-    chart: gitlab-2.1.7
+    chart: gitlab-2.2.1
     release: gitlab
     heritage: Tiller
     
@@ -4382,7 +4647,7 @@ spec:
           
           env:
             - name: GITLAB_VERSION
-              value: '12.1.6'
+              value: '12.2.1'
           volumeMounts:
             - name: chart-info
               mountPath: /chart-info
@@ -4400,93 +4665,6 @@ spec:
       - name: scripts
         configMap:
           name: gitlab-gitlab-upgrade-check
----
-# gitlab-shared-secrets.1-s4e-selfsign
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: gitlab-shared-secrets.1-s4e-selfsign
-  namespace: gitlab
-  labels:
-    app: shared-secrets
-    chart: shared-secrets-0.1.0
-    release: gitlab
-    heritage: Tiller
-    
-  annotations:
-    "helm.sh/hook": pre-install,pre-upgrade
-    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
-spec:
-  template:
-    metadata:
-      labels:
-        app: shared-secrets
-        release: gitlab
-    spec:
-      securityContext:
-        runAsUser: 65534
-        fsGroup: 65534
-      serviceAccountName: gitlab-shared-secrets
-      restartPolicy: Never      
-      initContainers:
-      - name: cfssl-self-sign
-        image: "registry.gitlab.com/gitlab-org/build/cng/cfssl-self-sign:1.2"
-        env:
-        - name: CA_SUBJECT
-          value: "GitLab Helm Chart" # defaults to GitLab in container
-        - name: CA_ORG
-          value: "gitlab" # defaults to GitLab in container
-        - name: CA_ORG_UNIT
-          value: "gitlab" # defaults to Cloud Native in container
-        - name: CERT_SUBJECT
-          value: "centos.local" # defaults to GitLab in container
-        - name: CERT_DOMAIN
-          value: "centos.local" # defaults to example.com in container
-        - name: EXPIRY
-          value: "365d" # defaults to 8076h in container
-        - name: ALGORITHM
-          value: "rsa" # defaults to ecdsa in container
-        - name: KEY_SIZE
-          value: "4096" # defaults to 256 inside container
-        volumeMounts:
-        - name: certs-path
-          mountPath: /output
-        resources:
-          requests:
-            cpu: 50m
-          
-      containers:
-      - name: kubectl
-        image: "registry.gitlab.com/gitlab-org/build/cng/kubectl:54033d1192f85dbd4f30e84187818514b5b07ebd"
-        command:
-        - /bin/bash
-        - -exc
-        - |
-          certname=gitlab-wildcard-tls
-          # create wildcard certificate secret
-          kubectl create secret tls $certname \
-            --cert=/output/wildcard.pem --key=/output/wildcard-key.pem || true
-          kubectl --namespace=$namespace label \
-            secret $certname  $(echo 'app.kubernetes.io/name=gitlab' | sed -E 's/=[^ ]*/-/g')
-          kubectl --namespace=$namespace label --overwrite \
-            secret $certname app=shared-secrets chart=shared-secrets-0.1.0 release=gitlab heritage=Tiller 
-          # create CA certificate secret
-          kubectl create secret generic ${certname}-ca \
-            --from-file=cfssl_ca=/output/ca.pem || true
-          kubectl --namespace=$namespace label \
-            secret ${certname}-ca  $(echo 'app.kubernetes.io/name=gitlab' | sed -E 's/=[^ ]*/-/g')
-          kubectl --namespace=$namespace label --overwrite \
-            secret ${certname}-ca app=shared-secrets chart=shared-secrets-0.1.0 release=gitlab heritage=Tiller 
-        volumeMounts:
-        - name: certs-path
-          mountPath: /output
-        resources:
-          requests:
-            cpu: 50m
-          
-      volumes:
-      - name: certs-path
-        emptyDir: {}
 ---
 # gitlab-shared-secrets
 apiVersion: v1
@@ -4628,79 +4806,18 @@ data:
     # Registry http.secret secret
     generate_secret_if_needed "gitlab-registry-httpsecret" --from-literal="secret"=$(gen_random 'a-z0-9' 128 | base64 -w 0)
 ---
-# gitlab-shared-secrets
-kind: Role
-apiVersion: rbac.authorization.k8s.io/v1
-metadata:
-  name: gitlab-shared-secrets
-  namespace: gitlab
-  labels:
-    app: shared-secrets
-    chart: shared-secrets-0.1.0
-    release: gitlab
-    heritage: Tiller
-  annotations:
-    "helm.sh/hook": pre-install,pre-upgrade
-    "helm.sh/hook-weight": "-5"
-    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
-rules:
-- apiGroups: [""]
-  resources: ["secrets"]
-  verbs: ["get", "list", "create", "patch"]
----
-# gitlab-shared-secrets
-apiVersion: rbac.authorization.k8s.io/v1
-kind: RoleBinding
-metadata:
-  name: gitlab-shared-secrets
-  namespace: gitlab
-  labels:
-    app: shared-secrets
-    chart: shared-secrets-0.1.0
-    release: gitlab
-    heritage: Tiller
-  annotations:
-    "helm.sh/hook": pre-install,pre-upgrade
-    "helm.sh/hook-weight": "-5"
-    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: Role
-  name: gitlab-shared-secrets
-subjects:
-  - kind: ServiceAccount
-    name: gitlab-shared-secrets
-    namespace: gitlab
----
-# gitlab-shared-secrets
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: gitlab-shared-secrets
-  namespace: gitlab
-  labels:
-    app: shared-secrets
-    chart: shared-secrets-0.1.0
-    release: gitlab
-    heritage: Tiller
-    
-  annotations:
-    "helm.sh/hook": pre-install,pre-upgrade
-    "helm.sh/hook-weight": "-5"
-    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
----
-# gitlab-unicorn-test-runner-x6eql
+# gitlab-unicorn-test-runner-nzdb4
 apiVersion: v1
 kind: Pod
 metadata:
-  name: gitlab-unicorn-test-runner-x6eql
+  name: gitlab-unicorn-test-runner-nzdb4
   namespace: gitlab
   annotations:
     "helm.sh/hook": test-success
 spec:
   containers:
   - name: test-runner
-    image: registry.gitlab.com/gitlab-org/build/cng/gitlab-unicorn-ce:v12.1.6
+    image: registry.gitlab.com/gitlab-org/build/cng/gitlab-unicorn-ce:v12.2.1
     command: ['sh', '/tests/test_login']
     volumeMounts:
       - name: tests
@@ -4720,54 +4837,6 @@ spec:
         - key: "password"
           path: initial_root_password
   restartPolicy: Never
----
-# gitlab-shared-secrets.1-f3n
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: gitlab-shared-secrets.1-f3n
-  namespace: gitlab
-  labels:
-    app: shared-secrets
-    chart: shared-secrets-0.1.0
-    release: gitlab
-    heritage: Tiller
-    
-  annotations:
-    "helm.sh/hook": pre-install,pre-upgrade
-    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
-spec:
-  template:
-    metadata:
-      labels:
-        app: shared-secrets
-        release: gitlab
-    spec:
-      securityContext:
-        runAsUser: 65534
-        fsGroup: 65534
-      serviceAccountName: gitlab-shared-secrets
-      restartPolicy: Never      
-      containers:
-        - name: shared-secrets
-          image: "registry.gitlab.com/gitlab-org/build/cng/kubectl:54033d1192f85dbd4f30e84187818514b5b07ebd"
-          command: ['/bin/bash', '/scripts/generate-secrets']
-          
-          volumeMounts:
-            - name: scripts
-              mountPath: /scripts
-            - name: ssh
-              mountPath: /etc/ssh
-          resources:
-            requests:
-              cpu: 50m
-            
-      volumes:
-      - name: scripts
-        configMap:
-          name: gitlab-shared-secrets
-      - name: ssh
-        emptyDir: {}
 MANIFEST:
 
 ---
@@ -4779,7 +4848,7 @@ metadata:
   namespace: gitlab
   labels:
     app: gitaly
-    chart: gitaly-2.1.7
+    chart: gitaly-2.2.1
     release: gitlab
     heritage: Tiller
     
@@ -4798,7 +4867,7 @@ metadata:
   namespace: gitlab
   labels:
     app: gitlab-shell
-    chart: gitlab-shell-2.1.7
+    chart: gitlab-shell-2.2.1
     release: gitlab
     heritage: Tiller
     
@@ -4817,7 +4886,7 @@ metadata:
   namespace: gitlab
   labels:
     app: sidekiq
-    chart: sidekiq-2.1.7
+    chart: sidekiq-2.2.1
     release: gitlab
     heritage: Tiller
     
@@ -4836,7 +4905,7 @@ metadata:
   namespace: gitlab
   labels:
     app: unicorn
-    chart: unicorn-2.1.7
+    chart: unicorn-2.2.1
     release: gitlab
     heritage: Tiller
     
@@ -4913,7 +4982,7 @@ metadata:
   namespace: gitlab
   labels:
     app: gitaly
-    chart: gitaly-2.1.7
+    chart: gitaly-2.2.1
     release: gitlab
     heritage: Tiller
     
@@ -4996,7 +5065,7 @@ metadata:
   namespace: gitlab
   labels:
     app: gitlab-monitor
-    chart: gitlab-monitor-2.1.7
+    chart: gitlab-monitor-2.2.1
     release: gitlab
     heritage: Tiller
     
@@ -5075,7 +5144,7 @@ metadata:
   namespace: gitlab
   labels:
     app: gitlab-shell
-    chart: gitlab-shell-2.1.7
+    chart: gitlab-shell-2.2.1
     release: gitlab
     heritage: Tiller
     
@@ -5142,7 +5211,7 @@ metadata:
   namespace: gitlab
   labels:
     app: gitlab-shell
-    chart: gitlab-shell-2.1.7
+    chart: gitlab-shell-2.2.1
     release: gitlab
     heritage: Tiller
     
@@ -5157,7 +5226,7 @@ metadata:
   namespace: gitlab
   labels:
     app: migrations
-    chart: migrations-2.1.7
+    chart: migrations-2.2.1
     release: gitlab
     heritage: Tiller
     
@@ -5172,6 +5241,7 @@ data:
       password: "<%= File.read("/etc/gitlab/postgres/psql-password").strip.dump[1..-2] %>"
       host: gitlab-postgresql
       port: 5432
+      prepared_statements: false
       # load_balancing:
       #   hosts:
       #     - host1.example.com
@@ -5220,7 +5290,7 @@ metadata:
   namespace: gitlab
   labels:
     app: sidekiq
-    chart: sidekiq-2.1.7
+    chart: sidekiq-2.2.1
     release: gitlab
     heritage: Tiller
     
@@ -5239,7 +5309,7 @@ metadata:
   namespace: gitlab
   labels:
     app: sidekiq
-    chart: sidekiq-2.1.7
+    chart: sidekiq-2.2.1
     release: gitlab
     heritage: Tiller
     
@@ -5256,6 +5326,7 @@ data:
       password: "<%= File.read("/etc/gitlab/postgres/psql-password").strip.dump[1..-2] %>"
       host: gitlab-postgresql
       port: 5432
+      prepared_statements: false
       # load_balancing:
       #   hosts:
       #     - host1.example.com
@@ -5474,7 +5545,7 @@ metadata:
   namespace: gitlab
   labels:
     app: task-runner
-    chart: task-runner-2.1.7
+    chart: task-runner-2.2.1
     release: gitlab
     heritage: Tiller
     
@@ -5488,7 +5559,8 @@ data:
       username: gitlab
       password: "<%= File.read("/etc/gitlab/postgres/psql-password").strip.dump[1..-2] %>"
       host: gitlab-postgresql
-      port: 5432      
+      port: 5432
+      prepared_statements: false      
   smtp_settings.rb: |
     
   resque.yml.erb: |
@@ -5717,7 +5789,34 @@ data:
     # 2) Do not set permissions for key file
     # 3) GCP Project ID
     # 4) Decline anonymous usage statistics
-    printf "$GOOGLE_APPLICATION_CREDENTIALS\nN\n\nN\n" | gsutil config -e && while sleep 3600; do :; done
+    printf "$GOOGLE_APPLICATION_CREDENTIALS\nN\n\nN\n" | gsutil config -e
+---
+# Source: gitlab/charts/gitlab/charts/unicorn/templates/configmap.yml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gitlab-workhorse-config
+  namespace: gitlab
+  labels:
+    app: unicorn
+    chart: unicorn-2.2.1
+    release: gitlab
+    heritage: Tiller
+    
+data:
+  installation_type: |
+    gitlab-helm-chart
+  workhorse-config.toml.erb: |
+    [redis]
+    URL = "redis://gitlab-redis:6379"
+    Password = "<%= File.read("/etc/gitlab/redis/password").strip.dump[1..-2] %>"
+  configure: |
+      set -e
+      mkdir -p /init-secrets-workhorse/gitlab-workhorse
+      cp -v -r -L /init-config/gitlab-workhorse/secret /init-secrets-workhorse/gitlab-workhorse/secret
+      mkdir -p /init-secrets-workhorse/redis
+      cp -v -r -L /init-config/redis/password /init-secrets-workhorse/redis/
+# Leave this here - This line denotes end of block to the parser.
 ---
 # Source: gitlab/charts/gitlab/charts/unicorn/templates/configmap.yml
 apiVersion: v1
@@ -5727,7 +5826,7 @@ metadata:
   namespace: gitlab
   labels:
     app: unicorn
-    chart: unicorn-2.1.7
+    chart: unicorn-2.2.1
     release: gitlab
     heritage: Tiller
     
@@ -5744,6 +5843,7 @@ data:
       password: "<%= File.read("/etc/gitlab/postgres/psql-password").strip.dump[1..-2] %>"
       host: gitlab-postgresql
       port: 5432
+      prepared_statements: false
       # load_balancing:
       #   hosts:
       #     - host1.example.com
@@ -6010,33 +6110,6 @@ data:
         cp -v -r -L "${config_dir}/${secret}/." "${secret_dir}/${secret}/"
       fi
     done
----
-# Source: gitlab/charts/gitlab/charts/unicorn/templates/configmap.yml
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: gitlab-workhorse-config
-  namespace: gitlab
-  labels:
-    app: unicorn
-    chart: unicorn-2.1.7
-    release: gitlab
-    heritage: Tiller
-    
-data:
-  installation_type: |
-    gitlab-helm-chart
-  workhorse-config.toml.erb: |
-    [redis]
-    URL = "redis://gitlab-redis:6379"
-    Password = "<%= File.read("/etc/gitlab/redis/password").strip.dump[1..-2] %>"
-  configure: |
-      set -e
-      mkdir -p /init-secrets-workhorse/gitlab-workhorse
-      cp -v -r -L /init-config/gitlab-workhorse/secret /init-secrets-workhorse/gitlab-workhorse/secret
-      mkdir -p /init-secrets-workhorse/redis
-      cp -v -r -L /init-config/redis/password /init-secrets-workhorse/redis/
-# Leave this here - This line denotes end of block to the parser.
 ---
 # Source: gitlab/charts/gitlab/charts/unicorn/templates/tests/tests.yaml
 apiVersion: v1
@@ -6393,10 +6466,10 @@ data:
   config.yml: |
     version: 0.1
     log:
-      level: warn
       fields:
         service: registry
-    # health:
+      level: warn
+      # health:
     #   storagedriver:
     #     enabled: true
     #     interval: 10s
@@ -6424,6 +6497,8 @@ data:
     compatibility:
       schema1:
         enabled: false
+    validation:
+      disabled: true
     storage:
       s3:
         accesskey: "ACCESS_KEY"
@@ -6449,12 +6524,13 @@ metadata:
   namespace: gitlab
   labels:
     app: gitlab
-    chart: gitlab-2.1.7
+    chart: gitlab-2.2.1
     release: gitlab
     heritage: Tiller
     
 data:
-  gitlabVersion: "12.1.6"
+  gitlabVersion: "12.2.1"
+  gitlabChartVersion: "2.2.1"
 ---
 # Source: gitlab/charts/minio/templates/minio_pvc.yaml
 kind: PersistentVolumeClaim
@@ -6521,7 +6597,7 @@ metadata:
   namespace: gitlab
   labels:
     app: gitaly
-    chart: gitaly-2.1.7
+    chart: gitaly-2.2.1
     release: gitlab
     heritage: Tiller
     
@@ -6549,7 +6625,7 @@ metadata:
   namespace: gitlab
   labels:
     app: gitlab-monitor
-    chart: gitlab-monitor-2.1.7
+    chart: gitlab-monitor-2.2.1
     release: gitlab
     heritage: Tiller
     
@@ -6574,7 +6650,7 @@ metadata:
   namespace: gitlab
   labels:
     app: gitlab-shell
-    chart: gitlab-shell-2.1.7
+    chart: gitlab-shell-2.2.1
     release: gitlab
     heritage: Tiller
     
@@ -6599,7 +6675,7 @@ metadata:
   namespace: gitlab
   labels:
     app: unicorn
-    chart: unicorn-2.1.7
+    chart: unicorn-2.2.1
     release: gitlab
     heritage: Tiller
     
@@ -6733,7 +6809,7 @@ metadata:
   namespace: gitlab
   labels:
     app: gitlab-monitor
-    chart: gitlab-monitor-2.1.7
+    chart: gitlab-monitor-2.2.1
     release: gitlab
     heritage: Tiller
     
@@ -6749,7 +6825,7 @@ spec:
         app: gitlab-monitor
         release: gitlab
       annotations:
-        checksum/config: c9ffd0d8cd1fd0cc5504e1848e688164b5dd65d65853818d8db88f621b51d838
+        checksum/config: 2d9809c50d89cbd22c0dbeb80008ce715085bd16dffaddcefc86afbc2f890542
         prometheus.io/path: /metrics
         prometheus.io/port: "9168"
         prometheus.io/scrape: "true"
@@ -6777,9 +6853,6 @@ spec:
           - name: etc-ssl-certs
             mountPath: /etc/ssl/certs
             readOnly: false
-          - name: custom-ca-certificates
-            mountPath: /usr/local/share/ca-certificates
-            readOnly: true
           resources:
             requests:
               cpu: 50m
@@ -6874,12 +6947,6 @@ spec:
       - name: etc-ssl-certs
         emptyDir:
           medium: "Memory"
-      - name: custom-ca-certificates
-        projected:
-          defaultMode: 0400
-          sources:
-          - secret:
-              name: gitlab-wildcard-tls-ca
 ---
 # Source: gitlab/charts/gitlab/charts/gitlab-shell/templates/deployment.yaml
 apiVersion: apps/v1beta2
@@ -6889,7 +6956,7 @@ metadata:
   namespace: gitlab
   labels:
     app: gitlab-shell
-    chart: gitlab-shell-2.1.7
+    chart: gitlab-shell-2.2.1
     release: gitlab
     heritage: Tiller
     
@@ -6904,7 +6971,7 @@ spec:
         app: gitlab-shell
         release: gitlab
       annotations:
-        checksum/config: ec6a4c1fa29a54f16aa688d1c140432e83d96bd6a109264ea23fa50f69646f2f
+        checksum/config: e5a6d4d759130256bfb6fc9e64d03c004a0d0272d28e8548cf3bbb28cd1f52ba
         cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
     spec:
       initContainers:
@@ -6916,9 +6983,6 @@ spec:
           - name: etc-ssl-certs
             mountPath: /etc/ssl/certs
             readOnly: false
-          - name: custom-ca-certificates
-            mountPath: /usr/local/share/ca-certificates
-            readOnly: true
           resources:
             requests:
               cpu: 50m
@@ -7025,12 +7089,6 @@ spec:
       - name: etc-ssl-certs
         emptyDir:
           medium: "Memory"
-      - name: custom-ca-certificates
-        projected:
-          defaultMode: 0400
-          sources:
-          - secret:
-              name: gitlab-wildcard-tls-ca
 ---
 # Source: gitlab/charts/gitlab/charts/sidekiq/templates/deployment.yaml
 apiVersion: apps/v1beta2
@@ -7040,7 +7098,7 @@ metadata:
   namespace: gitlab
   labels:
     app: sidekiq
-    chart: sidekiq-2.1.7
+    chart: sidekiq-2.2.1
     release: gitlab
     heritage: Tiller
     
@@ -7056,9 +7114,9 @@ spec:
         app: sidekiq
         release: gitlab
       annotations:
-        checksum/configmap: 4f2d370ed0a903ed8ea90ba60de0e9124ee5283ecedd74279cd8601f5c04ef36
+        checksum/configmap: cc38b5b3f2497be4acec28bc18195f7992f2e33a1405aee7d1b6a8ef4229829d
         cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
-        checksum/configmap-pod: 526d1e76067b6943f88850acd8d101cd5ad2b04f36ad48b61f8d26d1d2886848
+        checksum/configmap-pod: 94d46924a7c88047f34bb8e35e7a237dd23648f34bd2c247cf55c8b5519fe902
         prometheus.io/port: "3807"
         prometheus.io/scrape: "true"
         
@@ -7085,9 +7143,6 @@ spec:
           - name: etc-ssl-certs
             mountPath: /etc/ssl/certs
             readOnly: false
-          - name: custom-ca-certificates
-            mountPath: /usr/local/share/ca-certificates
-            readOnly: true
           resources:
             requests:
               cpu: 50m
@@ -7112,7 +7167,7 @@ spec:
               cpu: 50m
             
         - name: dependencies
-          image: "registry.gitlab.com/gitlab-org/build/cng/gitlab-sidekiq-ce:v12.1.6"
+          image: "registry.gitlab.com/gitlab-org/build/cng/gitlab-sidekiq-ce:v12.2.1"
           
           args:
             - /scripts/wait-for-deps
@@ -7142,7 +7197,7 @@ spec:
       containers:
         
         - name: sidekiq
-          image: "registry.gitlab.com/gitlab-org/build/cng/gitlab-sidekiq-ce:v12.1.6"
+          image: "registry.gitlab.com/gitlab-org/build/cng/gitlab-sidekiq-ce:v12.2.1"
           
           env:
             - name: prometheus_multiproc_dir
@@ -7273,12 +7328,6 @@ spec:
       - name: etc-ssl-certs
         emptyDir:
           medium: "Memory"
-      - name: custom-ca-certificates
-        projected:
-          defaultMode: 0400
-          sources:
-          - secret:
-              name: gitlab-wildcard-tls-ca
 ---
 # Source: gitlab/charts/gitlab/charts/task-runner/templates/deployment.yaml
 apiVersion: apps/v1beta2
@@ -7288,7 +7337,7 @@ metadata:
   namespace: gitlab
   labels:
     app: task-runner
-    chart: task-runner-2.1.7
+    chart: task-runner-2.2.1
     release: gitlab
     heritage: Tiller
     
@@ -7307,7 +7356,7 @@ spec:
         app: task-runner
         release: gitlab
       annotations:
-        checksum/config: 233ceadc1e3579bea0adfd12e95f1bec308c040b9d88c4dba6deff14e560c5d8
+        checksum/config: 040248b36bede1c4508170a2ee959b1354148d31e4b799e5c1cc4248a132d6b1
         cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
     spec:
       securityContext:
@@ -7322,9 +7371,6 @@ spec:
           - name: etc-ssl-certs
             mountPath: /etc/ssl/certs
             readOnly: false
-          - name: custom-ca-certificates
-            mountPath: /usr/local/share/ca-certificates
-            readOnly: true
           resources:
             requests:
               cpu: 50m
@@ -7355,7 +7401,7 @@ spec:
             - /bin/bash
             - -c
             - cp -v -r -L /etc/gitlab/.s3cfg $HOME/.s3cfg && while sleep 3600; do :; done # alpine sleep has no infinity
-          image: "registry.gitlab.com/gitlab-org/build/cng/gitlab-task-runner-ce:v12.1.6"
+          image: "registry.gitlab.com/gitlab-org/build/cng/gitlab-task-runner-ce:v12.2.1"
           
           env:
             - name: ARTIFACTS_BUCKET_NAME
@@ -7470,12 +7516,6 @@ spec:
       - name: etc-ssl-certs
         emptyDir:
           medium: "Memory"
-      - name: custom-ca-certificates
-        projected:
-          defaultMode: 0400
-          sources:
-          - secret:
-              name: gitlab-wildcard-tls-ca
 ---
 # Source: gitlab/charts/gitlab/charts/unicorn/templates/deployment.yaml
 apiVersion: apps/v1beta2
@@ -7485,7 +7525,7 @@ metadata:
   namespace: gitlab
   labels:
     app: unicorn
-    chart: unicorn-2.1.7
+    chart: unicorn-2.2.1
     release: gitlab
     heritage: Tiller
     
@@ -7501,7 +7541,7 @@ spec:
         app: unicorn
         release: gitlab
       annotations:
-        checksum/config: 757474df89d40a6f5362770e3931220c06de4fa3e9f28c9caf6fb3b916fc9d24
+        checksum/config: dc6c16f0e11a5f12278ccd6a6fbb479e8c3e75eb376e312b5babd4482b97d441
         cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
         prometheus.io/path: /-/metrics
         prometheus.io/port: "8080"
@@ -7530,9 +7570,6 @@ spec:
           - name: etc-ssl-certs
             mountPath: /etc/ssl/certs
             readOnly: false
-          - name: custom-ca-certificates
-            mountPath: /usr/local/share/ca-certificates
-            readOnly: true
           resources:
             requests:
               cpu: 50m
@@ -7564,7 +7601,7 @@ spec:
               cpu: 50m
             
         - name: dependencies
-          image: "registry.gitlab.com/gitlab-org/build/cng/gitlab-unicorn-ce:v12.1.6"
+          image: "registry.gitlab.com/gitlab-org/build/cng/gitlab-unicorn-ce:v12.2.1"
           
           args:
             - /scripts/wait-for-deps
@@ -7591,7 +7628,7 @@ spec:
       containers:
         
         - name: unicorn
-          image: "registry.gitlab.com/gitlab-org/build/cng/gitlab-unicorn-ce:v12.1.6"
+          image: "registry.gitlab.com/gitlab-org/build/cng/gitlab-unicorn-ce:v12.2.1"
           
           ports:
             - containerPort: 8080
@@ -7653,7 +7690,7 @@ spec:
               memory: 1.2G
             
         - name: gitlab-workhorse
-          image: "registry.gitlab.com/gitlab-org/build/cng/gitlab-workhorse-ce:v12.1.6"
+          image: "registry.gitlab.com/gitlab-org/build/cng/gitlab-workhorse-ce:v12.2.1"
           
           ports:
             - containerPort: 8181
@@ -7778,12 +7815,6 @@ spec:
       - name: etc-ssl-certs
         emptyDir:
           medium: "Memory"
-      - name: custom-ca-certificates
-        projected:
-          defaultMode: 0400
-          sources:
-          - secret:
-              name: gitlab-wildcard-tls-ca
 ---
 # Source: gitlab/charts/minio/templates/minio_deployment.yaml
 apiVersion: apps/v1beta2
@@ -8009,7 +8040,7 @@ spec:
         app: redis
         release: gitlab
       annotations:
-        checksum/config: 9e01f22bcdc62bbf6567958b03a91a0cab64ab22935207c7b0f9885227a8ee70
+        checksum/config: 31493e7f74617473ab4f2683b5f90dc543b239d7d8c773e4f6112272ed2f0432
     spec:
       securityContext:
         runAsUser: 999
@@ -8125,7 +8156,7 @@ spec:
         app: registry
         release: gitlab
       annotations:
-        checksum/configmap: 5eb27df45739245893019185ce7db25f3c69294f7f17868e39b2e64da97da574
+        checksum/configmap: 1cbd779c2f827b02db52ab13f4062686d74049a15b981d57326fef5576776721
         cluster-autoscaler.kubernetes.io/safe-to-evict: "true"
     spec:
       securityContext:
@@ -8144,14 +8175,11 @@ spec:
       initContainers:
         - name: certificates
           image: "registry.gitlab.com/gitlab-org/build/cng/alpine-certificates:20171114-r3"
-          
+          imagePullPolicy: "IfNotPresent"
           volumeMounts:
           - name: etc-ssl-certs
             mountPath: /etc/ssl/certs
             readOnly: false
-          - name: custom-ca-certificates
-            mountPath: /usr/local/share/ca-certificates
-            readOnly: true
           resources:
             requests:
               cpu: 50m
@@ -8209,12 +8237,6 @@ spec:
       - name: etc-ssl-certs
         emptyDir:
           medium: "Memory"
-      - name: custom-ca-certificates
-        projected:
-          defaultMode: 0400
-          sources:
-          - secret:
-              name: gitlab-wildcard-tls-ca
 ---
 # Source: gitlab/charts/gitlab/charts/gitaly/templates/statefulset.yml
 apiVersion: apps/v1beta2
@@ -8242,7 +8264,7 @@ spec:
         app: gitaly
         release: gitlab
       annotations:
-        checksum/config: 2fee200a847f8b44c72cf9ab50c46139360fb8ccf7a46fd7c311029bb1782a84
+        checksum/config: 0286d7dff6bb0903a49153031a030526481a959a66033fd11e4962b2c4074b0a
     spec:
       terminationGracePeriodSeconds: 30
       initContainers:
@@ -8254,9 +8276,6 @@ spec:
           - name: etc-ssl-certs
             mountPath: /etc/ssl/certs
             readOnly: false
-          - name: custom-ca-certificates
-            mountPath: /usr/local/share/ca-certificates
-            readOnly: true
           resources:
             requests:
               cpu: 50m
@@ -8295,7 +8314,7 @@ spec:
       containers:
         
         - name: gitaly
-          image: "registry.gitlab.com/gitlab-org/build/cng/gitaly:v1.53.2"
+          image: "registry.gitlab.com/gitlab-org/build/cng/gitaly:v1.59.0"
           
           ports:
             - containerPort: 8075
@@ -8374,12 +8393,6 @@ spec:
       - name: etc-ssl-certs
         emptyDir:
           medium: "Memory"
-      - name: custom-ca-certificates
-        projected:
-          defaultMode: 0400
-          sources:
-          - secret:
-              name: gitlab-wildcard-tls-ca
   volumeClaimTemplates:
     - metadata:
         name: repo-data
@@ -8402,7 +8415,7 @@ metadata:
   namespace: gitlab
   labels:
     app: migrations
-    chart: migrations-2.1.7
+    chart: migrations-2.2.1
     release: gitlab
     heritage: Tiller
     
@@ -8427,9 +8440,6 @@ spec:
           - name: etc-ssl-certs
             mountPath: /etc/ssl/certs
             readOnly: false
-          - name: custom-ca-certificates
-            mountPath: /usr/local/share/ca-certificates
-            readOnly: true
           resources:
             requests:
               cpu: 50m
@@ -8457,7 +8467,7 @@ spec:
       containers:
         
         - name: migrations
-          image: "registry.gitlab.com/gitlab-org/build/cng/gitlab-rails-ce:v12.1.6"
+          image: "registry.gitlab.com/gitlab-org/build/cng/gitlab-rails-ce:v12.2.1"
           args:
             - /scripts/wait-for-deps
             - /scripts/db-migrate
@@ -8536,12 +8546,6 @@ spec:
       - name: etc-ssl-certs
         emptyDir:
           medium: "Memory"
-      - name: custom-ca-certificates
-        projected:
-          defaultMode: 0400
-          sources:
-          - secret:
-              name: gitlab-wildcard-tls-ca
 ---
 # Source: gitlab/charts/minio/templates/create-buckets-job.yaml
 apiVersion: batch/v1
@@ -8597,7 +8601,7 @@ metadata:
   namespace: gitlab
   labels:
     app: unicorn
-    chart: unicorn-2.1.7
+    chart: unicorn-2.2.1
     release: gitlab
     heritage: Tiller
     
@@ -8624,7 +8628,7 @@ spec:
   tls:
     - hosts:
       - gitlab.centos.local
-      secretName: gitlab-wildcard-tls
+      secretName: gitlab-tls
 ---
 # Source: gitlab/charts/minio/templates/ingress.yaml
 apiVersion: extensions/v1beta1
@@ -8658,7 +8662,7 @@ spec:
   tls:
     - hosts:
       - minio.centos.local
-      secretName: gitlab-wildcard-tls
+      secretName: gitlab-tls
 ---
 # Source: gitlab/charts/registry/templates/ingress.yaml
 apiVersion: extensions/v1beta1
@@ -8692,7 +8696,7 @@ spec:
   tls:
     - hosts:
       - registry.centos.local
-      secretName: gitlab-wildcard-tls
+      secretName: gitlab-tls
 ---
 # Source: gitlab/charts/gitlab/charts/gitlab-shell/templates/hpa.yaml
 apiVersion: autoscaling/v2beta1
@@ -8702,7 +8706,7 @@ metadata:
   namespace: gitlab
   labels:
     app: gitlab-shell
-    chart: gitlab-shell-2.1.7
+    chart: gitlab-shell-2.2.1
     release: gitlab
     heritage: Tiller
     
@@ -8727,7 +8731,7 @@ metadata:
   namespace: gitlab
   labels:
     app: sidekiq
-    chart: sidekiq-2.1.7
+    chart: sidekiq-2.2.1
     release: gitlab
     heritage: Tiller
     
@@ -8752,7 +8756,7 @@ metadata:
   namespace: gitlab
   labels:
     app: unicorn
-    chart: unicorn-2.1.7
+    chart: unicorn-2.2.1
     release: gitlab
     heritage: Tiller
     
